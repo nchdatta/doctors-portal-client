@@ -32,7 +32,21 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.hero-section {
+  background: url('./assets/images/bg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.appointment,
+.contact-us {
+  background: url('./assets/images/appointment.png');
+  background-size: cover;
+  background-position: center;
 }
