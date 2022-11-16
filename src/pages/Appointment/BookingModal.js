@@ -40,7 +40,7 @@ const BookingModal = (props) => {
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">{treatment}</h3>
                     <form className='flex flex-col gap-4 pt-10' onSubmit={handleBookAppointment}>
-                        <input type="text" name='date' disabled defaultValue={format(date, 'PP')} placeholder="Type here" className="input input-bordered w-full" />
+                        <input type="text" name='date' disabled value={format(date, 'PP')} placeholder="Type here" className="input input-bordered w-full" />
                         <select name='slot' className="select select-bordered w-full">
                             {slots?.map(slot => <option key={slots.indexOf(slot)}>{slot}</option>)}
                         </select>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
 
 const SignUp = () => {
@@ -9,14 +9,17 @@ const SignUp = () => {
     const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const [user] = useAuthState(auth);
     const navigate = useNavigate();
 
 
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
-        navigate('/');
     };
+    if (user) {
+        navigate('/', { replace: true });
+    }
 
     return (
         <div className='lg:w-1/4 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>

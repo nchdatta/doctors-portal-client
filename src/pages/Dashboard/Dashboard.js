@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
     return (
-        <div className="lg:px-12">
+        <div className="">
             <div className="drawer drawer-mobile">
                 <input id="side-dashboard" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col bg-gray-100 p-7">

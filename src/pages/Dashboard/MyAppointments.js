@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../utilities/firebase.init';
 
 const MyAppointments = () => {
     const [bookings, setBookings] = useState([]);
+    const [user] = useAuthState(auth);
+
     useEffect(() => {
-        fetch('http://localhost:5000/booking')
+        fetch(`http://localhost:5000/booking?email=${user.email}`)
             .then(res => res.json())
             .then(data => setBookings(data.bookings));
-    }, []);
+    }, [user]);
 
     return (
         <div className="overflow-x-auto">
@@ -22,7 +26,7 @@ const MyAppointments = () => {
                 <tbody>
                     {
                         bookings.map((booking, index) =>
-                            <tr>
+                            <tr key={booking._id}>
                                 <th>{index + 1}</th>
                                 <td>{booking.treatment}</td>
                                 <td>{(booking.date)}</td>

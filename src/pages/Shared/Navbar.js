@@ -17,7 +17,7 @@ const Navbar = () => {
             <li>{user ? <Link onClick={async () => await signOut()}>Sign Out</Link> : <Link to='/login'>Login</Link>}</li>
         </>;
     return (
-        <nav className='lg:px-12'>
+        <nav className='lg:px-12 shadow-sm'>
             <div className="navbar bg-base-100 text-neutral">
                 <div className="navbar-start">
                     <div className="dropdown">

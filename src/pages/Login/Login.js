@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../utilities/firebase.init';
@@ -8,15 +8,19 @@ const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const [user] = useAuthState(auth);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
     const onSubmit = async (data) => {
         await signInWithEmailAndPassword(data.email, data.password);
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
     };
 
+    if (user) {
+        navigate(from, { replace: true });
+    }
 
     return (
         <div className='lg:w-1/4 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>
