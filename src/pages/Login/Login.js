@@ -1,11 +1,20 @@
 import React from 'react';
+import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../utilities/firebase.init';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
+    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
+
+    const onSubmit = async (data) => {
+        await signInWithEmailAndPassword(data.email, data.password);
+        navigate(from, { replace: true });
     };
 
 
@@ -34,7 +43,8 @@ const Login = () => {
                         <label htmlFor="">New to Doctors Portal? <Link to='/signup' className='text-primary'>Create new account</Link> </label>
                     </form>
                     <div className="divider">OR</div>
-                    <button className="btn btn-outline w-full">Continue With Google</button>
+                    <button className="btn btn-outline w-full"
+                        onClick={() => signInWithGoogle()}>Continue With Google</button>
                 </div>
             </div>
         </div>

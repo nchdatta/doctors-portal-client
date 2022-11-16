@@ -86,40 +86,5 @@ const users = [
     },
 ];
 
-// Menus 
-const menus = [
-    {
-        id: 1000,
-        name: 'Home',
-        to: '/'
-    },
-    {
-        id: 1001,
-        name: 'About',
-        to: '/about'
-    },
-    {
-        id: 1002,
-        name: 'Appointment',
-        to: '/appointment'
-    },
-    {
-        id: 1003,
-        name: 'Reviews',
-        to: '/reviews'
-    },
-    {
-        id: 1004,
-        name: 'Contact us',
-        to: '/contact-us'
-    },
-    {
-        id: 1005,
-        name: 'Login',
-        to: '/login'
-    },
 
-];
-
-
-export { info, services, users, menus };
+export { info, services, users };

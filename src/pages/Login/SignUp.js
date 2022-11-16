@@ -1,12 +1,21 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../utilities/firebase.init';
 
 const SignUp = () => {
-
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
+    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile] = useUpdateProfile(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const navigate = useNavigate();
+
+
+    const onSubmit = async (data) => {
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.name });
+        navigate('/');
     };
 
     return (
@@ -18,7 +27,7 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label htmlFor="name">Name</label>
                         <input type='name' className='input input-bordered w-full'
-                            {...register("name", { required: "Email Address is required" })}
+                            {...register("name", { required: "Name is required" })}
                             aria-invalid={errors.name ? "true" : "false"}
                         />
                         {errors.name && <p role="alert" className='text-error'>{errors.name?.message}</p>}
@@ -30,17 +39,18 @@ const SignUp = () => {
                         {errors.email && <p role="alert" className='text-error'>{errors.email?.message}</p>}
                         <label htmlFor="password">Password</label>
                         <input type='password' className='input input-bordered w-full'
-                            {...register("password", { required: true, minLength: 6 })}
+                            {...register("password", { required: true, minLength: { value: 6, message: 'Password should at least 6 characters.' } })}
                             aria-invalid={errors.password ? "true" : "false"}
                         />
-                        {errors.password?.type === 'required' && <p role="alert" className='text-error'>Password is required</p>}
+                        {errors.password && <p role="alert" className='text-error'>{errors.password?.message}</p>}
                         <label><Link>Forgot Password?</Link></label>
                         <input type="submit" value='SignUp' className='btn btn-neutral w-full mt-4 mb-2' />
 
                         <label htmlFor="">Already registered? <Link to='/login' className='text-primary'>Login now</Link> </label>
                     </form>
                     <div className="divider">OR</div>
-                    <button className="btn btn-outline w-full">Continue With Google</button>
+                    <button className="btn btn-outline w-full"
+                        onClick={() => signInWithGoogle()}>Continue With Google</button>
                 </div>
             </div>
         </div>
