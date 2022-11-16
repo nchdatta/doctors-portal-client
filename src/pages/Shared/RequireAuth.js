@@ -8,7 +8,7 @@ const RequireAuth = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <div><svg class="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
+        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
     }
     if (!user) {
         return <Navigate to='/login' state={{ from: location }} replace />;

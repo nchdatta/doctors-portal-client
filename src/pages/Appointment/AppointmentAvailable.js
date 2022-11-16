@@ -4,13 +4,13 @@ import AppointmentCard from './AppointmentCard';
 import BookingModal from './BookingModal';
 
 const AppointmentAvailable = ({ date }) => {
-    const [appointments, setAppointments] = useState([]);
+    const [services, setServices] = useState([]);
     const [booking, setBooking] = useState({});
 
     useEffect(() => {
-        fetch('appointment-data.json')
+        fetch('http://localhost:5000/service')
             .then(res => res.json())
-            .then(data => setAppointments(data));
+            .then(data => setServices(data));
     }, []);
 
     return (
@@ -19,9 +19,9 @@ const AppointmentAvailable = ({ date }) => {
 
             <div className='my-10 grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
-                    appointments.map(appointment => <AppointmentCard
-                        key={appointment._id}
-                        appointment={appointment}
+                    services.map(service => <AppointmentCard
+                        key={service._id}
+                        service={service}
                         setBooking={setBooking} />)
                 }
             </div>
