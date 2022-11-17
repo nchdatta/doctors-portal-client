@@ -4,7 +4,7 @@ const Testimonial = (props) => {
     const { name, address, img, review } = props.user;
 
     return (
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-md">
             <div className="card-body text-neutral">
                 <p className='mb-6'>{review}</p>
                 <div className="flex items-center">

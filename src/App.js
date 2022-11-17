@@ -23,7 +23,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/appointment' element={<Appointment />} />
+        <Route path='/appointment' element={<RequireAuth><Appointment /></RequireAuth>} />
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} >
           <Route index element={<MyAppointments />} />

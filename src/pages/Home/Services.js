@@ -9,7 +9,7 @@ const Services = () => {
             <div className="text-center mb-16">
                 <SectionHeading title={'Our Services'} subTitle={'Services We Provide'} />
             </div>
-            <div className='grid grid-cols-1 lg:grid-cols-3 gap-3'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
                 {
                     services.map(service => <Service
                         key={service.id}

@@ -12,29 +12,51 @@ const MyAppointments = () => {
             .then(data => setBookings(data.bookings));
     }, [user]);
 
+    const handleCancel = id => {
+        const confirm = window.confirm('Are you sure want to cancel booking?');
+        if (confirm) {
+            fetch(`http://localhost:5000/booking/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const remaining = bookings.filter(b => b._id !== data.deletedBooking._id);
+                    setBookings(remaining);
+                });
+        }
+    }
+
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th>Sl.</th>
-                        <th>Treatment</th>
-                        <th>Date</th>
-                        <th>Slot</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        bookings.map((booking, index) =>
-                            <tr key={booking._id}>
-                                <th>{index + 1}</th>
-                                <td>{booking.treatment}</td>
-                                <td>{(booking.date)}</td>
-                                <td>{booking.slot}</td>
-                            </tr>)
-                    }
-                </tbody>
-            </table>
+        <div>
+            <h2 className='text-xl mb-3 text-primary'>My Appointments</h2>
+            <div className="overflow-x-auto">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <th>Sl.</th>
+                            <th>Treatment</th>
+                            <th>Date</th>
+                            <th>Slot</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            bookings.map((booking, index) =>
+                                <tr key={booking._id}>
+                                    <th>{index + 1}</th>
+                                    <td>{booking.treatment}</td>
+                                    <td>{booking.date}</td>
+                                    <td>{booking.slot}</td>
+                                    <td>{<button onClick={() => handleCancel(booking._id)}>Cancel</button>}</td>
+                                </tr>)
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
