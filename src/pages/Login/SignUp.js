@@ -3,21 +3,25 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
-    const [signInWithGoogle] = useSignInWithGoogle(auth);
-    const [user] = useAuthState(auth);
     const navigate = useNavigate();
+    const [token] = useToken(user || gUser);
 
 
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
     };
-    if (user) {
+
+    if (loading || gLoading) {
+        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
+    } else if (token) {
         navigate('/', { replace: true });
     }
 

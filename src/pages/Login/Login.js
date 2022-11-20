@@ -2,15 +2,16 @@ import React from 'react';
 import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 import auth from '../../utilities/firebase.init';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle] = useSignInWithGoogle(auth);
-    const [user] = useAuthState(auth);
+    const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const location = useLocation();
     const navigate = useNavigate();
+    const [token] = useToken(user || gUser);
     const from = location.state?.from?.pathname || '/';
 
     const onSubmit = async (data) => {
@@ -18,8 +19,10 @@ const Login = () => {
         // navigate(from, { replace: true });
     };
 
-    if (user) {
-        navigate(from, { replace: true });
+    if (loading || gLoading) {
+        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
+    } else if (token) {
+        navigate('/', { replace: true });
     }
 
     return (

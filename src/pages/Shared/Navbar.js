@@ -14,7 +14,10 @@ const Navbar = () => {
             <li><Link to='/reviews'>Reviews</Link></li>
             <li><Link to='/dashboard'>Dashboard</Link></li>
             <li><Link to='/contact-us'>Contact us</Link></li>
-            <li>{user ? <Link onClick={async () => await signOut()}>Sign Out</Link> : <Link to='/login'>Login</Link>}</li>
+            <li>{user ? <Link onClick={async () => {
+                await signOut();
+                localStorage.removeItem('accessToken');
+            }}>Sign Out</Link> : <Link to='/login'>Login</Link>}</li>
         </>;
     return (
         <nav className='lg:px-12 shadow-sm'>

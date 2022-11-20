@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
@@ -7,9 +8,15 @@ const MyAppointments = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/booking?email=${user.email}`)
+        fetch(`http://localhost:5000/booking?email=${user.email}`, {
+            method: 'GET',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
-            .then(data => setBookings(data.bookings));
+            .then(data => setBookings(data.bookings))
+            .catch(err => console.log(err.message))
     }, [user]);
 
     const handleCancel = id => {
@@ -45,13 +52,15 @@ const MyAppointments = () => {
                     </thead>
                     <tbody>
                         {
-                            bookings.map((booking, index) =>
+                            bookings?.map((booking, index) =>
                                 <tr key={booking._id}>
                                     <th>{index + 1}</th>
                                     <td>{booking.treatment}</td>
-                                    <td>{booking.date}</td>
+                                    <td>{format(new Date(booking.date), 'PP')}</td>
                                     <td>{booking.slot}</td>
-                                    <td>{<button onClick={() => handleCancel(booking._id)}>Cancel</button>}</td>
+                                    <td>{<button
+                                        onClick={() => handleCancel(booking._id)}
+                                        title='Click to cancel the appointment.'>Cancel</button>}</td>
                                 </tr>)
                         }
                     </tbody>
