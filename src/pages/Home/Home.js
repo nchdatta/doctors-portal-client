@@ -1,4 +1,5 @@
 import React from 'react';
+import PageTitle from '../Shared/PageTitle';
 import AppointmentSection from './AppointmentSection';
 import Banner from './Banner';
 import ContactUs from './ContactUs';
@@ -10,6 +11,7 @@ import Testimonials from './Testimonials';
 const Home = () => {
     return (
         <div>
+            <PageTitle title='Find Best Doctors & Book Appointment' />
             <Hero />
             <Info />
             <Services />

@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
+import PageTitle from '../Shared/PageTitle';
 
 const MyAppointments = () => {
     const [bookings, setBookings] = useState([]);
@@ -38,6 +39,7 @@ const MyAppointments = () => {
 
     return (
         <div>
+            <PageTitle title='My Appointments' />
             <h2 className='text-xl mb-3 text-primary'>My Appointments</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">

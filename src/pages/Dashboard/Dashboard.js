@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import PageTitle from '../Shared/PageTitle';
 
 const Dashboard = () => {
     return (
         <div>
+            <PageTitle title="Dashboard" />
             <div className="drawer drawer-mobile">
                 <input id="side-dashboard" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col bg-gray-100 p-7">

@@ -1,9 +1,13 @@
 import React from 'react';
+import PageTitle from '../Shared/PageTitle';
 
 const About = () => {
     return (
-        <div className='px-12 text-center min-h-screen flex items-center justify-center'>
-            <h2 className='text-2xl'>This is About Page</h2>
+        <div>
+            <PageTitle title="About Us" />
+            <div className='px-12 text-center min-h-screen flex items-center justify-center'>
+                <h2 className='text-2xl'>This is About Page</h2>
+            </div>
         </div>
     );
 };
