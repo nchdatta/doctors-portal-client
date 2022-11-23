@@ -62,7 +62,7 @@ const MyAppointments = () => {
                                     <td>{booking.treatment}</td>
                                     <td>{format(new Date(booking.date), 'PP')}</td>
                                     <td>{booking.slot}</td>
-                                    <td>{<button
+                                    <td>{<button className='btn btn-sm btn-primary'
                                         onClick={() => handleCancel(booking._id)}
                                         title='Click to cancel the appointment.'>Cancel</button>}</td>
                                 </tr>)

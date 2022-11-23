@@ -71,15 +71,13 @@ const Users = () => {
                                     <td>{user.role}</td>
                                     <td>{
                                         <>
-                                            <button
+                                            <button className='btn btn-sm btn-primary'
                                                 onClick={() => RemoveUser(user._id)}
-                                                className='underline'
                                                 title='Click to Remove the user.'>Remove</button>
                                             {" "}
                                             {user.role !== 'admin' &&
-                                                <button
+                                                <button className='btn btn-sm btn-secondary'
                                                     onClick={() => MakeAdmin(user.email)}
-                                                    className='underline'
                                                     title='Make this user an Admin.'>Make Admin</button>}
                                         </>
                                     }

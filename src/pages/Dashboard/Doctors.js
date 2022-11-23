@@ -59,9 +59,8 @@ const Doctors = () => {
                                     <td>{doctor.name}</td>
                                     <td>{doctor.email}</td>
                                     <td>{doctor.speciality}</td>
-                                    <td>{<button
+                                    <td>{<button className='btn btn-sm btn-primary'
                                         onClick={() => RemoveDoctor(doctor._id)}
-                                        className='underline'
                                         title='Click to Remove the user.'>Remove</button>
                                     }
                                     </td>

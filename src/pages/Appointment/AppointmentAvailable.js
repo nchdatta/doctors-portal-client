@@ -14,7 +14,7 @@ const AppointmentAvailable = ({ date }) => {
 
     return (
         <section className='my-16 px-4 lg:px-12'>
-            <h2 className='text-secondary text-xl text-center'>Available Appointments on {format(date, 'PP')}</h2>
+            <h2 className='text-secondary text-xl text-center'>Available Appointments on <span className='font-bold'>{format(date, 'PP')}</span></h2>
 
             <div className='my-10 grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
