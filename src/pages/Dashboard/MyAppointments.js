@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import baseUrl from '../../utilities/baseUrl';
 import auth from '../../utilities/firebase.init';
 import PageTitle from '../Shared/PageTitle';
 
@@ -9,7 +10,7 @@ const MyAppointments = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/booking?email=${user.email}`, {
+        fetch(baseUrl + `/booking?email=${user.email}`, {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -20,10 +21,11 @@ const MyAppointments = () => {
             .catch(err => console.log(err.message))
     }, [user]);
 
+
     const handleCancel = id => {
         const confirm = window.confirm('Are you sure want to cancel booking?');
         if (confirm) {
-            fetch(`http://localhost:5000/booking/${id}`, {
+            fetch(baseUrl + `/booking/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json'
@@ -40,7 +42,7 @@ const MyAppointments = () => {
     return (
         <div>
             <PageTitle title='My Appointments' />
-            <h2 className='text-xl mb-3 text-primary'>My Appointments</h2>
+            <h2 className='text-xl mb-3 text-primary'>My Appointments <span className='text-sm text-neutral'>[Total: {bookings.length}]</span></h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>

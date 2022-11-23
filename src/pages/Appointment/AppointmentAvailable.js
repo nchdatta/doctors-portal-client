@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import baseUrl from '../../utilities/baseUrl';
 import AppointmentCard from './AppointmentCard';
 import BookingModal from './BookingModal';
 
@@ -8,7 +9,7 @@ const AppointmentAvailable = ({ date }) => {
     const [booking, setBooking] = useState({});
 
     useEffect(() => {
-        fetch('http://localhost:5000/service')
+        fetch(baseUrl + '/service')
             .then(res => res.json())
             .then(data => setServices(data));
     }, []);

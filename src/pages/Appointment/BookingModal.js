@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import baseUrl from '../../utilities/baseUrl';
 import auth from '../../utilities/firebase.init';
 
 const BookingModal = (props) => {
@@ -21,7 +22,7 @@ const BookingModal = (props) => {
             patientEmail: e.target.email.value,
         };
 
-        fetch('http://localhost:5000/booking', {
+        fetch(baseUrl + '/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

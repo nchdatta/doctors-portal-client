@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AppointmentCard = ({ service, setBooking }) => {
-    const { _id, treatment, slots } = service;
+    const { treatment, slots } = service;
     return (
         <div className="card shadow-lg">
             <div className="card-body text-neutral text-center">

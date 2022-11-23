@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
 import useToken from '../../hooks/useToken';
 
@@ -11,7 +11,7 @@ const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
-    const [token] = useToken(user || gUser);
+    const [token] = useToken();
 
 
     const onSubmit = async (data) => {

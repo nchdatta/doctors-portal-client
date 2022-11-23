@@ -1,8 +1,18 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
+import useRole from '../../hooks/useRole';
+import auth from '../../utilities/firebase.init';
 import PageTitle from '../Shared/PageTitle';
 
 const Dashboard = () => {
+    const [user, loading] = useAuthState(auth);
+    const [role] = useRole(user);
+
+    if (loading) {
+        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
+    }
+
     return (
         <div>
             <PageTitle title="Dashboard" />
@@ -19,6 +29,13 @@ const Dashboard = () => {
                         {/* <!-- Sidebar content here --> */}
                         <li><Link to='/dashboard'>My Appointments</Link></li>
                         <li><Link to='/dashboard/appointment-history'>Appointment History</Link></li>
+                        {role === 'admin' &&
+                            <>
+                                <li><Link to='/dashboard/users'>Users</Link></li>
+                                <li><Link to='/dashboard/doctors'>Doctors</Link></li>
+                                <li><Link to='/dashboard/add-doctor'>Add Doctor</Link></li>
+                            </>
+                        }
                     </ul>
 
                 </div>

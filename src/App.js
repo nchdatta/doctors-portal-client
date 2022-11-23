@@ -14,6 +14,10 @@ import Footer from './pages/Shared/Footer';
 import Navbar from './pages/Shared/Navbar';
 import AppointmentHistory from './pages/Dashboard/AppointmentHistory';
 import RequireAuth from './pages/Shared/RequireAuth';
+import Users from './pages/Dashboard/Users';
+import Doctors from './pages/Dashboard/Doctors';
+import AddDoctor from './pages/Dashboard/AddDoctor';
+import RequireAdmin from './pages/Shared/RequireAdmin';
 
 function App() {
   return (
@@ -28,6 +32,9 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} >
           <Route index element={<MyAppointments />} />
           <Route path='appointment-history' element={<AppointmentHistory />} />
+          <Route path='users' element={<RequireAdmin><Users /></RequireAdmin>} />
+          <Route path='doctors' element={<RequireAdmin><Doctors /></RequireAdmin>} />
+          <Route path='add-doctor' element={<RequireAdmin><AddDoctor /></RequireAdmin>} />
         </Route>
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/login' element={<Login />} />

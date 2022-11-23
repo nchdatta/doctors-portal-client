@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import baseUrl from "../utilities/baseUrl";
+import auth from "../utilities/firebase.init";
 
-const useToken = (user) => {
+const useToken = () => {
+    const [user] = useAuthState(auth);
     const [token, setToken] = useState('');
 
     useEffect(() => {
         if (user) {
-            fetch('http://localhost:5000/user/verify-token', {
+            // JWT Token Verification 
+            fetch(baseUrl + '/user/verify-token', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -19,6 +24,19 @@ const useToken = (user) => {
                     setToken(accessToken);
                 })
                 .catch(err => console.log(err.message));
+
+
+            // Insert/Update a user 
+            fetch(baseUrl + '/user', {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ email: user.email })
+            })
+                .then(res => res.json())
+                .then();
+
         }
 
     }, [user]);
