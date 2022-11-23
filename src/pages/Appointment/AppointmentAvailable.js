@@ -1,18 +1,16 @@
 import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import baseUrl from '../../utilities/baseUrl';
+import Loading from '../Shared/Loading';
 import AppointmentCard from './AppointmentCard';
 import BookingModal from './BookingModal';
 
 const AppointmentAvailable = ({ date }) => {
-    const [services, setServices] = useState([]);
     const [booking, setBooking] = useState({});
 
-    useEffect(() => {
-        fetch(baseUrl + '/service')
-            .then(res => res.json())
-            .then(data => setServices(data));
-    }, []);
+    const { data: services, isLoading } = useQuery('services', () => fetch(baseUrl + '/service').then(res => res.json()));
+    if (isLoading) { return <Loading /> }
 
     return (
         <section className='my-16 px-4 lg:px-12'>

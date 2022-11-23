@@ -3,15 +3,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
 import useRole from '../../hooks/useRole';
 import auth from '../../utilities/firebase.init';
+import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 
 const Dashboard = () => {
     const [user, loading] = useAuthState(auth);
     const [role] = useRole(user);
 
-    if (loading) {
-        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
-    }
+    if (loading) { return <Loading /> }
 
     return (
         <div>

@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
 import baseUrl from '../../utilities/baseUrl';
+import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 
 const Doctors = () => {
-    const [doctors, setDoctors] = useState([]);
+    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch(baseUrl + '/doctor', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()));
 
-    useEffect(() => {
-        fetch(baseUrl + '/doctor', {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => setDoctors(data));
-    }, []);
+    if (isLoading) { return <Loading /> }
+
 
     const RemoveDoctor = id => {
         const confirm = window.confirm('Are you sure want to remove the doctor?');
@@ -28,7 +27,11 @@ const Doctors = () => {
                 }
             })
                 .then(res => res.json())
-                .then();
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        refetch();
+                    }
+                });
         }
 
     }

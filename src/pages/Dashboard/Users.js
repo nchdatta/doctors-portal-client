@@ -2,6 +2,7 @@ import React from 'react';
 import PageTitle from '../Shared/PageTitle';
 import baseUrl from '../../utilities/baseUrl';
 import { useQuery } from 'react-query';
+import Loading from '../Shared/Loading';
 
 const Users = () => {
     const { data: users, isLoading, refetch } = useQuery('users', () => fetch(baseUrl + '/user', {
@@ -9,12 +10,9 @@ const Users = () => {
             'content-type': 'application/json',
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
-    }).then(res => res.json())
-    );
+    }).then(res => res.json()));
 
-    if (isLoading) {
-        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
-    }
+    if (isLoading) { return <Loading /> }
 
     const RemoveUser = id => {
         const confirm = window.confirm('Are you sure want to remove the user?');
