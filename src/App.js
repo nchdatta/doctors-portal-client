@@ -22,7 +22,7 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-    <div>
+    <div className='lg:w-3/4 mx-auto'>
       <Toaster />
       <Navbar />
       <Routes>

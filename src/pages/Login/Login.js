@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import auth from '../../utilities/firebase.init';
+import Loading from '../Shared/Loading';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -20,13 +21,13 @@ const Login = () => {
     };
 
     if (loading || gLoading) {
-        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
+        return <Loading />;
     } else if (token) {
         navigate(from, { replace: true });
     }
 
     return (
-        <div className='lg:w-1/4 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>
+        <div className='lg:w-2/6 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>
             <div className="card shadow-lg">
                 <div className="card-body">
                     <h2 className="card-title justify-center">Login</h2>

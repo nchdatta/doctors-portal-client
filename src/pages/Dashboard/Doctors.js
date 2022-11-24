@@ -1,19 +1,12 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import baseUrl from '../../utilities/baseUrl';
-import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 import toast from 'react-hot-toast';
+import useDoctors from '../../hooks/useDoctors';
+import Loading from '../Shared/Loading';
 
 const Doctors = () => {
-    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch(baseUrl + '/doctor', {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json',
-            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        }
-    }).then(res => res.json()));
-
+    const [doctors, isLoading, refetch] = useDoctors();
     if (isLoading) { return <Loading /> }
 
 
@@ -56,7 +49,7 @@ const Doctors = () => {
                     </thead>
                     <tbody>
                         {
-                            doctors?.map((doctor, index) =>
+                            doctors.map((doctor, index) =>
                                 <tr key={doctor._id}>
                                     <th>{index + 1}</th>
                                     <td>{doctor.name}</td>

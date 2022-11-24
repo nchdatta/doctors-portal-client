@@ -3,14 +3,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
 import useRole from '../../hooks/useRole';
 import auth from '../../utilities/firebase.init';
-import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 
 const Dashboard = () => {
-    const [user, loading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [role] = useRole(user);
-
-    if (loading) { return <Loading /> }
 
     return (
         <div>

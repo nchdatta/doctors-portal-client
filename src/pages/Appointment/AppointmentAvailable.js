@@ -13,7 +13,7 @@ const AppointmentAvailable = ({ date }) => {
     if (isLoading) { return <Loading /> }
 
     return (
-        <section className='my-16 px-4 lg:px-12'>
+        <section className='my-16 px-4 lg:px-8'>
             <h2 className='text-secondary text-xl text-center'>Available Appointments on <span className='font-bold'>{format(date, 'PP')}</span></h2>
 
             <div className='my-10 grid grid-cols-1 lg:grid-cols-3 gap-5'>

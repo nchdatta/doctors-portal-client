@@ -5,7 +5,7 @@ import { services } from '../../utilities/fakedata';
 
 const Services = () => {
     return (
-        <section className='my-20 px-4 lg:px-12'>
+        <section className='my-20 px-4 lg:px-8'>
             <div className="text-center mb-16">
                 <SectionHeading title={'Our Services'} subTitle={'Services We Provide'} />
             </div>

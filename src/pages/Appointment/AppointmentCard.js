@@ -7,8 +7,8 @@ const AppointmentCard = ({ service, setBooking }) => {
             <div className="card-body text-neutral text-center">
                 <h2 className="card-title mx-auto">{treatment}</h2>
                 <p>{slots.length ? slots[0] : <span className='text-error'>No slots available</span>}</p>
-                <p>{slots.length} Spaces Available</p>
-                <div className='w-1/2 mx-auto mt-4'>
+                <p>{slots.length} Slots Available</p>
+                <div className='mx-auto mt-4'>
                     <label htmlFor="booking-modal"
                         onClick={() => setBooking(service)}
                         disabled={slots.length === 0}

@@ -4,11 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
 import useToken from '../../hooks/useToken';
+import Loading from '../Shared/Loading';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
-    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
+    const [createUserWithEmailAndPassword, loading] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
     const [token] = useToken();
@@ -20,13 +21,13 @@ const SignUp = () => {
     };
 
     if (loading || gLoading) {
-        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
+        return <Loading />
     } else if (token) {
         navigate('/', { replace: true });
     }
 
     return (
-        <div className='lg:w-1/4 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>
+        <div className='lg:w-2/6 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>
             <div className="card shadow-lg">
                 <div className="card-body">
                     <h2 className="card-title justify-center">Sign Up</h2>

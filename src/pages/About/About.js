@@ -5,7 +5,7 @@ const About = () => {
     return (
         <div>
             <PageTitle title="About Us" />
-            <div className='px-12 text-center min-h-screen flex items-center justify-center'>
+            <div className='min-h-screen flex items-center justify-center'>
                 <h2 className='text-2xl'>This is About Page</h2>
             </div>
         </div>

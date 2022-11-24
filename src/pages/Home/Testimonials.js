@@ -6,7 +6,7 @@ import { users } from '../../utilities/fakedata';
 
 const Testimonials = () => {
     return (
-        <section className='my-16 px-4 lg:px-12'>
+        <section className='my-16 px-4 lg:px-8'>
             <div className='flex justify-between items-center mb-10'>
                 <div><SectionHeading title={'Testimonial'} subTitle={'What Our Patients Says'} /></div>
                 <img src={quote} className='w-1/6' alt="Quote" />

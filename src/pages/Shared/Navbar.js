@@ -13,15 +13,14 @@ const Navbar = () => {
             <li><Link to='/appointment'>Appointment</Link></li>
             <li><Link to='/reviews'>Reviews</Link></li>
             <li><Link to='/dashboard'>Dashboard</Link></li>
-            <li><Link to='/contact-us'>Contact us</Link></li>
             <li>{user ? <Link onClick={async () => {
                 await signOut();
                 localStorage.removeItem('accessToken');
             }}>Sign Out</Link> : <Link to='/login'>Login</Link>}</li>
         </>;
     return (
-        <nav className='lg:px-12 shadow-sm'>
-            <div className="navbar bg-base-100 text-neutral">
+        <nav className='shadow-sm'>
+            <div className="navbar bg-base-100 text-neutral px-0">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">

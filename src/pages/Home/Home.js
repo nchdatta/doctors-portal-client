@@ -3,6 +3,7 @@ import PageTitle from '../Shared/PageTitle';
 import AppointmentSection from './AppointmentSection';
 import Banner from './Banner';
 import ContactUs from './ContactUs';
+import DoctorsHome from './DoctorsHome';
 import Hero from './Hero';
 import Info from './Info';
 import Services from './Services';
@@ -17,6 +18,7 @@ const Home = () => {
             <Services />
             <Banner />
             <AppointmentSection />
+            <DoctorsHome />
             <Testimonials />
             <ContactUs />
         </div>

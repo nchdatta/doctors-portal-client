@@ -72,7 +72,7 @@ const AddDoctor = () => {
 
                 <label htmlFor="speciality">Speciality</label>
                 <select className="select select-bordered w-full mb-4"
-                    {...register("speciality", { required: true })}
+                    {...register("speciality", { required: 'Speciality is required.' })}
                     aria-invalid={errors.speciality ? "true" : "false"}>
                     <option>Pediatric Dental</option>
                     <option>Teeth Orthodontics</option>
@@ -84,7 +84,7 @@ const AddDoctor = () => {
                 {errors.speciality && <p role="alert" className='text-error'>{errors.speciality?.message}</p>}
 
                 <input type="file" className="file-input file-input-bordered w-full "
-                    {...register("img", { required: false })}
+                    {...register("img", { required: 'Photo is required.' })}
                     aria-invalid={errors.img ? "true" : "false"} />
                 {errors.img && <p role="alert" className='text-error'>{errors.img?.message}</p>}
 
