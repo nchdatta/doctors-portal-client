@@ -18,10 +18,12 @@ import Users from './pages/Dashboard/Users';
 import Doctors from './pages/Dashboard/Doctors';
 import AddDoctor from './pages/Dashboard/AddDoctor';
 import RequireAdmin from './pages/Shared/RequireAdmin';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div>
+      <Toaster />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

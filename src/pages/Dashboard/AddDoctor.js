@@ -2,9 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import baseUrl from '../../utilities/baseUrl';
 import PageTitle from '../Shared/PageTitle';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         const { name, email, speciality, img } = data;
@@ -32,11 +35,17 @@ const AddDoctor = () => {
                     })
                         .then(res => {
                             if (res.status === 403) {
-                                console.log('Doctor already registered.');
+                                toast.error('Doctor already registered.');
+                            } else if (res.status === 200) {
+                                return res.json();
                             }
-                            return res.json();
                         })
-                        .then()
+                        .then(data => {
+                            if (data) {
+                                toast.success(`Dr. ${data.name} is added successfuly.`)
+                                navigate('/dashboard/doctors', { replace: true });
+                            }
+                        })
                 }
             })
 

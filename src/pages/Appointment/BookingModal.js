@@ -3,6 +3,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import baseUrl from '../../utilities/baseUrl';
 import auth from '../../utilities/firebase.init';
+import toast from 'react-hot-toast';
 
 const BookingModal = (props) => {
     const { date, booking, setBooking } = props;
@@ -28,9 +29,15 @@ const BookingModal = (props) => {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(booking)
-        });
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setBooking(null);
+                    toast.success(`Appointment booked for ${data.booking.treatment}`);
+                }
+            });
 
-        setBooking(null);
     }
 
     return (

@@ -3,6 +3,7 @@ import PageTitle from '../Shared/PageTitle';
 import baseUrl from '../../utilities/baseUrl';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading';
+import toast from 'react-hot-toast';
 
 const Users = () => {
     const { data: users, isLoading, refetch } = useQuery('users', () => fetch(baseUrl + '/user', {
@@ -27,7 +28,10 @@ const Users = () => {
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data);
-                    refetch();
+                    if (data.success) {
+                        refetch();
+                        toast.success('Successfuly removed.');
+                    }
                 });
         }
 
@@ -43,8 +47,11 @@ const Users = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
-                refetch();
+                console.log(data);
+                if (data.modifiedCount) {
+                    refetch();
+                    toast.success(`Successfuly made an admin.`);
+                }
             });
     }
 

@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import baseUrl from '../../utilities/baseUrl';
 import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
+import toast from 'react-hot-toast';
 
 const Doctors = () => {
     const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch(baseUrl + '/doctor', {
@@ -16,7 +17,7 @@ const Doctors = () => {
     if (isLoading) { return <Loading /> }
 
 
-    const RemoveDoctor = id => {
+    const RemoveDoctor = (id, name) => {
         const confirm = window.confirm('Are you sure want to remove the doctor?');
         if (confirm) {
             fetch(baseUrl + `/doctor/${id}`, {
@@ -30,6 +31,7 @@ const Doctors = () => {
                 .then(data => {
                     if (data.deletedCount > 0) {
                         refetch();
+                        toast.success(`Successfuly removed ${name}.`)
                     }
                 });
         }
@@ -68,7 +70,7 @@ const Doctors = () => {
                                     </td>
                                     <td>{doctor.speciality}</td>
                                     <td>{<button className='btn btn-sm btn-primary'
-                                        onClick={() => RemoveDoctor(doctor._id)}
+                                        onClick={() => RemoveDoctor(doctor._id, doctor.name)}
                                         title='Click to Remove the user.'>Remove</button>
                                     }
                                     </td>
