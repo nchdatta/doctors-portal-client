@@ -7,23 +7,40 @@ const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
-        const { name, email, speciality } = data;
+        const { name, email, speciality, img } = data;
+        const formData = new FormData();
+        formData.append('image', img[0]);
 
-        fetch(baseUrl + '/doctor', {
+        // Uploading image to imbb 
+        fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_API}`, {
             method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-            },
-            body: JSON.stringify({ name, email, speciality })
+            body: formData
         })
-            .then(res => {
-                if (res.status !== 200) {
-                    console.log('Doctor already registered.');
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const image = data.data.url;
+
+                    // Adding doctor to database
+                    fetch(baseUrl + '/doctor', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify({ name, email, speciality, image })
+                    })
+                        .then(res => {
+                            if (res.status === 403) {
+                                console.log('Doctor already registered.');
+                            }
+                            return res.json();
+                        })
+                        .then()
                 }
-                return res.json();
             })
-            .then()
+
+
     };
 
     return (

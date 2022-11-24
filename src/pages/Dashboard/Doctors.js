@@ -47,6 +47,7 @@ const Doctors = () => {
                             <th>Sl.</th>
                             <th>Name</th>
                             <th>email</th>
+                            <th>Photo</th>
                             <th>Speciality</th>
                             <th>Action</th>
                         </tr>
@@ -58,6 +59,13 @@ const Doctors = () => {
                                     <th>{index + 1}</th>
                                     <td>{doctor.name}</td>
                                     <td>{doctor.email}</td>
+                                    <td>
+                                        <div className="avatar">
+                                            <div className="w-16 rounded-full">
+                                                <img src={doctor.image} alt={doctor.name} />
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{doctor.speciality}</td>
                                     <td>{<button className='btn btn-sm btn-primary'
                                         onClick={() => RemoveDoctor(doctor._id)}
