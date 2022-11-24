@@ -1,5 +1,5 @@
 import React from 'react';
-import chair from '../../assets/images/chair.png';
+import stethos from '../../assets/images/stethos.jpg';
 import PrimaryButton from '../Shared/PrimaryButton';
 
 const Hero = () => {
@@ -13,7 +13,7 @@ const Hero = () => {
                             Lorem Ipsum has been the industry's standard dummy text ever since the</p>
                         <PrimaryButton to='/appointment'>Get Started</PrimaryButton>
                     </div>
-                    <img src={chair} className="lg:w-1/2 rounded-lg shadow-lg" alt='Chair' />
+                    <img src={stethos} className="lg:w-1/2 rounded-lg shadow-lg" alt='Chair' />
                 </div>
             </div>
         </section>

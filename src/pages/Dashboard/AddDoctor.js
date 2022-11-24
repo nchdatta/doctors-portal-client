@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import baseUrl from '../../utilities/baseUrl';
 import PageTitle from '../Shared/PageTitle';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Shared/Loading';
 
 const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate();
+    const [bbLoading, setbbLoading] = useState(false);
 
     const onSubmit = (data) => {
+        setbbLoading(true);
         const { name, email, speciality, img } = data;
         const formData = new FormData();
         formData.append('image', img[0]);
@@ -41,6 +44,7 @@ const AddDoctor = () => {
                             }
                         })
                         .then(data => {
+                            setbbLoading(false);
                             if (data) {
                                 toast.success(`Dr. ${data.name} is added successfuly.`)
                                 navigate('/dashboard/doctors', { replace: true });
@@ -51,6 +55,7 @@ const AddDoctor = () => {
 
 
     };
+    if (bbLoading) { return <Loading /> }
 
     return (
         <div>
