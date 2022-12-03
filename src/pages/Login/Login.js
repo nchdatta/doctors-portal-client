@@ -20,9 +20,7 @@ const Login = () => {
         // navigate(from, { replace: true });
     };
 
-    if (loading || gLoading) {
-        return <Loading />;
-    } else if (token) {
+    if (token) {
         navigate(from, { replace: true });
     }
 
@@ -46,7 +44,9 @@ const Login = () => {
                         />
                         {errors.password?.type === 'required' && <p role="alert" className='text-error'>Password is required</p>}
                         <label><Link>Forgot Password?</Link></label>
-                        <input type="submit" value='Login' className='btn btn-neutral w-full mt-4 mb-2' />
+                        {loading || gLoading
+                            ? <Loading />
+                            : <input type="submit" value='Login' className='btn btn-neutral w-full mt-4 mb-2' />}
 
                         <label htmlFor="">New to Doctors Portal? <Link to='/signup' className='text-primary'>Create new account</Link> </label>
                     </form>

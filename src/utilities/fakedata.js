@@ -68,21 +68,21 @@ const users = [
         name: 'Winson Herry',
         address: 'Los Angeles',
         img: user1,
-        review: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content'
+        review: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content.'
     },
     {
         id: 201,
         name: 'Jason Roy',
         address: 'New York',
         img: user2,
-        review: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content'
+        review: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content.'
     },
     {
         id: 202,
         name: 'Will Smith',
         address: 'United Kingdom',
         img: user3,
-        review: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content'
+        review: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content.'
     },
 ];
 

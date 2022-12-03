@@ -10,7 +10,7 @@ const Dashboard = () => {
     const [role] = useRole(user);
 
     return (
-        <div>
+        <div className='pt-12'>
             <PageTitle title="Dashboard" />
             <div className="drawer drawer-mobile">
                 <input id="side-dashboard" type="checkbox" className="drawer-toggle" />
@@ -21,7 +21,7 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="side-dashboard" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-50 bg-base-100 text-base-content">
+                    <ul className="menu p-4 w-50 bg-base-100 text-base-content overflow-y-auto">
                         {/* <!-- Sidebar content here --> */}
                         <li><Link to='/dashboard'>My Appointments</Link></li>
                         <li><Link to='/dashboard/appointment-history'>Appointment History</Link></li>

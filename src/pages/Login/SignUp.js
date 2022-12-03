@@ -8,8 +8,8 @@ import Loading from '../Shared/Loading';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [createUserWithEmailAndPassword, loading] = useCreateUserWithEmailAndPassword(auth);
-    const [signInWithGoogle, gLoading] = useSignInWithGoogle(auth);
+    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
     const [token] = useToken();
@@ -20,9 +20,7 @@ const SignUp = () => {
         await updateProfile({ displayName: data.name });
     };
 
-    if (loading || gLoading) {
-        return <Loading />
-    } else if (token) {
+    if (token) {
         navigate('/', { replace: true });
     }
 
@@ -52,7 +50,9 @@ const SignUp = () => {
                         />
                         {errors.password && <p role="alert" className='text-error'>{errors.password?.message}</p>}
                         <label><Link>Forgot Password?</Link></label>
-                        <input type="submit" value='SignUp' className='btn btn-neutral w-full mt-4 mb-2' />
+                        {loading || gLoading
+                            ? <Loading />
+                            : <input type="submit" value='SignUp' className='btn btn-neutral w-full mt-4 mb-2' />}
 
                         <label htmlFor="">Already registered? <Link to='/login' className='text-primary'>Login now</Link> </label>
                     </form>

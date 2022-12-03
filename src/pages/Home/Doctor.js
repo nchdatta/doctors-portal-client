@@ -4,7 +4,7 @@ const Doctor = ({ doctor }) => {
     const { name, email, speciality, image } = doctor;
 
     return (
-        <div className="card bg-base-100 shadow-md">
+        <div className="card bg-base-100 border rounded-md">
             <figure className="px-10 pt-10">
                 <div className="avatar">
                     <div className="w-24 rounded-full">

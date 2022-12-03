@@ -8,6 +8,7 @@ const Navbar = () => {
     const [user] = useAuthState(auth);
     const [signOut] = useSignOut(auth);
 
+    const path = location.pathname;
     const menus =
         <>
             <li><NavLink to='/'>Home</NavLink></li>
@@ -21,8 +22,8 @@ const Navbar = () => {
             }}>Sign Out</Link> : <Link to='/login'>Login</Link>}</li>
         </>;
     return (
-        <nav className='shadow-sm'>
-            <div className="navbar bg-base-100 text-neutral px-0">
+        <nav className='w-full lg:w-3/4 fixed top-0 z-20 border-b'>
+            <div className="navbar bg-base-100 text-neutral px-0 min-h-0 py-0">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -35,11 +36,11 @@ const Navbar = () => {
                     <Link to={'/'} className="btn btn-ghost normal-case text-xl">Doctors Portal</Link>
                 </div>
 
-                {location.pathname === '/dashboard' &&
-                    <div className="navbar-end">
+                {path === '/dashboard' || path === '/dashboard/appointment-history' || path === '/dashboard/users' || path === '/dashboard/doctors' || path === '/dashboard/add-doctor'
+                    ? <div className="navbar-end">
                         <label htmlFor="side-dashboard" className="btn btn-ghost drawer-button lg:hidden"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                    </div>
+                    </div> : ''
                 }
 
                 <div className="navbar-end hidden lg:flex">
