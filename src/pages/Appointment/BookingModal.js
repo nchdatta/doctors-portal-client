@@ -7,15 +7,17 @@ import toast from 'react-hot-toast';
 
 const BookingModal = (props) => {
     const { date, booking, setBooking } = props;
-    const { _id, treatment, slots } = booking;
-
+    const { _id, treatment, slots, doctors } = booking;
     const [user] = useAuthState(auth);
+
+    // console.log(booking)
 
     const handleBookAppointment = e => {
         e.preventDefault();
         const booking = {
             treatmentId: _id,
             treatment,
+            doctor: e.target.doctor.value,
             date: e.target.date.value,
             slot: e.target.slot.value,
             patientName: e.target.name.value,
@@ -51,6 +53,9 @@ const BookingModal = (props) => {
                         <input type="text" name='date' disabled value={format(date, 'PP')} placeholder="Type here" className="input input-bordered w-full" />
                         <select name='slot' className="select select-bordered w-full">
                             {slots?.map(slot => <option key={slots.indexOf(slot)}>{slot}</option>)}
+                        </select>
+                        <select name='doctor' className="select select-bordered w-full">
+                            {doctors?.map(doctor => <option key={doctor._id}>{doctor.name}</option>)}
                         </select>
 
                         <input type="text" name='name' defaultValue={user?.displayName} readOnly placeholder="Full Name *" className="input input-bordered w-full" required />

@@ -11,6 +11,7 @@ const AppointmentAvailable = ({ date }) => {
 
     const { data: services, isLoading } = useQuery('services', () => fetch(baseUrl + '/service').then(res => res.json()));
     if (isLoading) { return <Loading /> }
+    // console.log(booking)
 
     return (
         <section className='my-16 px-4 lg:px-8'>
@@ -20,6 +21,7 @@ const AppointmentAvailable = ({ date }) => {
                 {
                     services.map(service => <AppointmentCard
                         key={service._id}
+                        date={date}
                         service={service}
                         setBooking={setBooking} />)
                 }

@@ -22,7 +22,7 @@ const Navbar = () => {
             }}>Sign Out</Link> : <Link to='/login'>Login</Link>}</li>
         </>;
     return (
-        <nav className='w-full lg:w-3/4 fixed top-0 z-20 border-b'>
+        <nav>
             <div className="navbar bg-base-100 text-neutral px-0 min-h-0 py-0">
                 <div className="navbar-start">
                     <div className="dropdown">

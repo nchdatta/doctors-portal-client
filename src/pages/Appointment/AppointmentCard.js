@@ -1,7 +1,11 @@
+import { getDate } from 'date-fns';
 import React from 'react';
+import toast from 'react-hot-toast';
+import baseUrl from '../../utilities/baseUrl';
 
-const AppointmentCard = ({ service, setBooking }) => {
+const AppointmentCard = ({ date, service, setBooking }) => {
     const { treatment, slots } = service;
+    const currentDate = new Date();
     return (
         <div className="card shadow-lg">
             <div className="card-body text-neutral text-center">
@@ -10,7 +14,21 @@ const AppointmentCard = ({ service, setBooking }) => {
                 <p>{slots.length} Slots Available</p>
                 <div className='mx-auto mt-4'>
                     <label htmlFor="booking-modal"
-                        onClick={() => setBooking(service)}
+                        onClick={() => {
+                            if (getDate(date) > currentDate.getDate()) {
+                                fetch(baseUrl + `/doctor/speciality?speciality=${treatment}`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'content-type': 'application/json',
+                                        'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                                    }
+                                }).then(res => res.json()).then(data => setBooking({ ...service, doctors: data }))
+
+                            } else {
+                                setBooking(null);
+                                toast.error("Invalid Date Picked! Try another date.")
+                            }
+                        }}
                         disabled={slots.length === 0}
                         className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white">
                         Book Appointment</label>

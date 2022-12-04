@@ -19,6 +19,7 @@ import Doctors from './pages/Dashboard/Doctors';
 import AddDoctor from './pages/Dashboard/AddDoctor';
 import RequireAdmin from './pages/Shared/RequireAdmin';
 import { Toaster } from 'react-hot-toast';
+import AllAppointments from './pages/Dashboard/AllAppointments';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} >
           <Route index element={<MyAppointments />} />
           <Route path='appointment-history' element={<AppointmentHistory />} />
+          <Route path='all-appointments' element={<RequireAdmin><AllAppointments /></RequireAdmin>} />
           <Route path='users' element={<RequireAdmin><Users /></RequireAdmin>} />
           <Route path='doctors' element={<RequireAdmin><Doctors /></RequireAdmin>} />
           <Route path='add-doctor' element={<RequireAdmin><AddDoctor /></RequireAdmin>} />

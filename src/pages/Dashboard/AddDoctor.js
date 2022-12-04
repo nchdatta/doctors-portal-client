@@ -63,13 +63,13 @@ const AddDoctor = () => {
             <h2 className='text-xl mb-3 text-primary'>Add a Doctor</h2>
             <form onSubmit={handleSubmit(onSubmit)} className='lg:w-1/2'>
                 <label htmlFor="name">Name</label>
-                <input type='name' className='input input-bordered w-full mb-4'
+                <input type='name' className='input input-bordered w-full mb-4 capitalize'
                     {...register("name", { required: "Name is required" })}
                     aria-invalid={errors.name ? "true" : "false"}
                 />
                 {errors.name && <p role="alert" className='text-error'>{errors.name?.message}</p>}
                 <label htmlFor="email">Email</label>
-                <input type='email' className='input input-bordered w-full mb-4'
+                <input type='email' className='input input-bordered w-full mb-4 lowercase'
                     {...register("email", { required: "Email is required" })}
                     aria-invalid={errors.email ? "true" : "false"}
                 />
