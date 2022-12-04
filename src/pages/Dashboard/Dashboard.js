@@ -14,7 +14,7 @@ const Dashboard = () => {
             <PageTitle title="Dashboard" />
             <div className="drawer drawer-mobile">
                 <input id="side-dashboard" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col bg-gray-100 p-7">
+                <div className="drawer-content flex flex-col bg-gray-100 p-6">
                     {/* Dashboard content here */}
                     <Outlet />
 
@@ -23,14 +23,24 @@ const Dashboard = () => {
                     <label htmlFor="side-dashboard" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-50 bg-base-100 text-base-content overflow-y-auto">
                         {/* <!-- Sidebar content here --> */}
-                        <li><Link to='/dashboard'>My Appointments</Link></li>
-                        <li><Link to='/dashboard/appointment-history'>Appointment History</Link></li>
+                        <li><Link to='/dashboard'>Profile</Link></li>
+                        {role === 'user' || role === 'admin' ?
+                            <>
+                                <li><Link to='/dashboard/my-appointments'>My Appointments</Link></li>
+                                <li><Link to='/dashboard/appointment-history'>Appointment History</Link></li>
+                            </> : ''
+                        }
                         {role === 'admin' &&
                             <>
                                 <li><Link to='/dashboard/all-appointments'>All Appointments</Link></li>
                                 <li><Link to='/dashboard/users'>Users</Link></li>
                                 <li><Link to='/dashboard/doctors'>Doctors</Link></li>
                                 <li><Link to='/dashboard/add-doctor'>Add Doctor</Link></li>
+                            </>
+                        }
+                        {role === 'doctor' &&
+                            <>
+                                <li><Link to='/dashboard/appointments'>Appointments</Link></li>
                             </>
                         }
                     </ul>

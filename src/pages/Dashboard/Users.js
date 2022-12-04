@@ -47,10 +47,26 @@ const Users = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.modifiedCount) {
                     refetch();
                     toast.success(`Successfuly made an admin.`);
+                }
+            });
+    }
+
+    const MakeDoctor = email => {
+        fetch(baseUrl + `/user/doctor?doctor=${email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    refetch();
+                    toast.success(`Successfuly made a Doctor.`);
                 }
             });
     }
@@ -78,14 +94,17 @@ const Users = () => {
                                     <td>{user.role}</td>
                                     <td>{
                                         <>
-                                            <button className='btn btn-sm btn-primary'
+                                            <button className='btn btn-sm btn-primary mr-2'
                                                 onClick={() => RemoveUser(user._id)}
                                                 title='Click to Remove the user.'>Remove</button>
-                                            {" "}
                                             {user.role !== 'admin' &&
-                                                <button className='btn btn-sm btn-secondary'
+                                                <button className='btn btn-sm btn-secondary mr-2'
                                                     onClick={() => MakeAdmin(user.email)}
-                                                    title='Make this user an Admin.'>Make Admin</button>}
+                                                    title='Make this user an Admin.'>Admin</button>}
+                                            {user.role !== 'doctor' &&
+                                                <button className='btn btn-sm btn-warning'
+                                                    onClick={() => MakeDoctor(user.email)}
+                                                    title='Make this user a Doctor.'>Doctor</button>}
                                         </>
                                     }
                                     </td>

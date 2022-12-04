@@ -20,7 +20,10 @@ import AddDoctor from './pages/Dashboard/AddDoctor';
 import RequireAdmin from './pages/Shared/RequireAdmin';
 import { Toaster } from 'react-hot-toast';
 import AllAppointments from './pages/Dashboard/AllAppointments';
-import VerifyEmail from './pages/Shared/VerifyEmail';
+import ForgotPassword from './pages/Login/ForgotPassword';
+import RequireDoctor from './pages/Shared/RequireDoctor';
+import Appointments from './pages/Dashboard/Appointments';
+import Profile from './pages/Dashboard/Profile';
 
 function App() {
   return (
@@ -34,9 +37,11 @@ function App() {
         <Route path='/appointment' element={<RequireAuth><Appointment /></RequireAuth>} />
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} >
-          <Route index element={<MyAppointments />} />
+          <Route index element={<Profile />} />
+          <Route path='my-appointments' element={<MyAppointments />} />
           <Route path='appointment-history' element={<AppointmentHistory />} />
           <Route path='all-appointments' element={<RequireAdmin><AllAppointments /></RequireAdmin>} />
+          <Route path='appointments' element={<RequireDoctor><Appointments /></RequireDoctor>} />
           <Route path='users' element={<RequireAdmin><Users /></RequireAdmin>} />
           <Route path='doctors' element={<RequireAdmin><Doctors /></RequireAdmin>} />
           <Route path='add-doctor' element={<RequireAdmin><AddDoctor /></RequireAdmin>} />
@@ -44,7 +49,7 @@ function App() {
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/verify-email' element={<VerifyEmail />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

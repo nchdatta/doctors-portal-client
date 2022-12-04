@@ -1,21 +1,18 @@
 import React from 'react';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import auth from '../../utilities/firebase.init';
 import Loading from '../Shared/Loading';
 
 const Login = () => {
-    const { register, formState: { errors }, getValues, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
     const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
-    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
     const location = useLocation();
     const navigate = useNavigate();
     const [token] = useToken();
-
 
     const from = location.state?.from?.pathname || '/';
 
@@ -30,7 +27,7 @@ const Login = () => {
 
     return (
         <div className='lg:w-2/6 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>
-            <div className="card shadow-lg">
+            <div className="card shadow-lg border">
                 <div className="card-body">
                     <h2 className="card-title justify-center">Login</h2>
 
@@ -48,15 +45,7 @@ const Login = () => {
                         />
                         {errors.password?.type === 'required' && <p role="alert" className='text-error'>Password is required</p>}
 
-                        <label className='text-secondary'><button onClick={async () => {
-                            const email = getValues('email');
-                            if (email) {
-                                const success = await sendPasswordResetEmail(email, { url: 'http://localhost:3000/login' });
-                                success && toast("Check email to reset your password.");
-                            } else {
-                                alert("Enter email in email field.");
-                            }
-                        }}>Forgot Password?</button></label>
+                        <Link to='/forgot-password' className='text-secondary'>Forgot Password?</Link>
 
                         {loading || gLoading
                             ? <Loading />

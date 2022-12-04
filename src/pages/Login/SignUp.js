@@ -25,7 +25,7 @@ const SignUp = () => {
 
     return (
         <div className='lg:w-2/6 px-4 lg:px-0 mx-auto min-h-screen flex items-center'>
-            <div className="card shadow-lg">
+            <div className="card shadow-lg border">
                 <div className="card-body">
                     <h2 className="card-title justify-center">Sign Up</h2>
 

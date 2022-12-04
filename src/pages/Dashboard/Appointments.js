@@ -1,0 +1,78 @@
+import React from 'react';
+import { format } from 'date-fns';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import baseUrl from '../../utilities/baseUrl';
+import auth from '../../utilities/firebase.init';
+import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
+import toast from 'react-hot-toast';
+
+const Appointments = () => {
+    const [user] = useAuthState(auth);
+
+    // Getting bookings data 
+    const { data: appointments, isLoading, refetch } = useQuery('doctor-appointments', () => fetch(baseUrl + `/booking/appointments?doctor=${user.displayName}`, {
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()));
+    if (isLoading) { return <Loading /> }
+
+
+    const handleCancel = id => {
+        const confirm = window.confirm('Are you sure want to cancel booking?');
+        if (confirm) {
+            fetch(baseUrl + `/booking/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        refetch();
+                        toast.success(`Cancelled booking for ${data.deletedBooking.treatment}`)
+                    }
+                });
+        }
+    }
+
+    return (
+        <div>
+            <PageTitle title='Appointments' />
+            <h2 className='text-xl mb-3 text-primary'>Appointments <span className='text-sm text-neutral'>[Total: {appointments.length}]</span></h2>
+            <div className="overflow-x-auto">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <th>Sl.</th>
+                            <th>Patient Name</th>
+                            <th>Date</th>
+                            <th>Slot</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            appointments?.map((appointment, index) =>
+                                <tr key={appointment._id}>
+                                    <th>{index + 1}</th>
+                                    <td>{appointment.patientName}</td>
+                                    <td>{format(new Date(appointment.date), 'PP')}</td>
+                                    <td>{appointment.slot}</td>
+                                    <td>{<button className='btn btn-sm btn-primary'
+                                        onClick={() => handleCancel(appointment._id)}
+                                        title='Click to cancel the appointment.'>Cancel</button>}</td>
+                                </tr>)
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
+
+export default Appointments;
