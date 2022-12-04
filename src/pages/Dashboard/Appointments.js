@@ -21,8 +21,25 @@ const Appointments = () => {
     if (isLoading) { return <Loading /> }
 
 
+    const handleConfirm = id => {
+        const confirm = window.confirm('Are you sure want to confirm appointment?');
+        if (confirm) {
+            fetch(baseUrl + `/booking/confirm/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        refetch();
+                    }
+                });
+        }
+    }
     const handleCancel = id => {
-        const confirm = window.confirm('Are you sure want to cancel booking?');
+        const confirm = window.confirm('Are you sure want to cancel appointment?');
         if (confirm) {
             fetch(baseUrl + `/booking/${id}`, {
                 method: 'DELETE',
@@ -34,7 +51,7 @@ const Appointments = () => {
                 .then(data => {
                     if (data.success) {
                         refetch();
-                        toast.success(`Cancelled booking for ${data.deletedBooking.treatment}`)
+                        toast.success(`Cancelled appointment for ${data.deletedBooking.patientName}`)
                     }
                 });
         }
@@ -44,14 +61,16 @@ const Appointments = () => {
         <div>
             <PageTitle title='Appointments' />
             <h2 className='text-xl mb-3 text-primary'>Appointments <span className='text-sm text-neutral'>[Total: {appointments.length}]</span></h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto text-sm">
                 <table className="table w-full">
                     <thead>
                         <tr>
                             <th>Sl.</th>
                             <th>Patient Name</th>
+                            <th>Phone</th>
                             <th>Date</th>
                             <th>Slot</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -61,11 +80,20 @@ const Appointments = () => {
                                 <tr key={appointment._id}>
                                     <th>{index + 1}</th>
                                     <td>{appointment.patientName}</td>
+                                    <td>{'0' + appointment.patientPhone}</td>
                                     <td>{format(new Date(appointment.date), 'PP')}</td>
                                     <td>{appointment.slot}</td>
-                                    <td>{<button className='btn btn-sm btn-primary'
-                                        onClick={() => handleCancel(appointment._id)}
-                                        title='Click to cancel the appointment.'>Cancel</button>}</td>
+                                    <td className={appointment.status === 'Confirm' ? 'text-green-500 font-semibold' : 'text-orange-600'}>{appointment.status}</td>
+                                    <td>{
+                                        <>
+                                            {appointment.status !== 'Confirm' && <button className='btn btn-sm btn-primary mr-2'
+                                                onClick={() => handleConfirm(appointment._id)}
+                                                title='Click to confirm the appointment.'>Confirm</button>}
+                                            <button className='btn btn-sm btn-error mr-2'
+                                                onClick={() => handleCancel(appointment._id)}
+                                                title='Click to cancel the appointment.'>Cancel</button>
+                                        </>
+                                    }</td>
                                 </tr>)
                         }
                     </tbody>

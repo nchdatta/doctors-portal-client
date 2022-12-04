@@ -44,7 +44,7 @@ const MyAppointments = () => {
         <div>
             <PageTitle title='My Appointments' />
             <h2 className='text-xl mb-3 text-primary'>My Appointments <span className='text-sm text-neutral'>[Total: {bookings.length}]</span></h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto text-sm">
                 <table className="table w-full">
                     <thead>
                         <tr>
@@ -53,6 +53,7 @@ const MyAppointments = () => {
                             <th>Doctor</th>
                             <th>Date</th>
                             <th>Slot</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -65,6 +66,7 @@ const MyAppointments = () => {
                                     <td>{booking.doctor}</td>
                                     <td>{format(new Date(booking.date), 'PP')}</td>
                                     <td>{booking.slot}</td>
+                                    <td className={booking.status === 'Confirm' ? 'text-green-500 font-semibold' : 'text-orange-600'}>{booking.status}</td>
                                     <td>{<button className='btn btn-sm btn-primary'
                                         onClick={() => handleCancel(booking._id)}
                                         title='Click to cancel the appointment.'>Cancel</button>}</td>

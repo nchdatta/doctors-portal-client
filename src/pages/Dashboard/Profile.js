@@ -14,7 +14,7 @@ const Profile = () => {
             <div className="flex items-start justify-start">
                 <div className="flex flex-col justify-center items-start">
                     <div className="avatar placeholder">
-                        <div className="bg-neutral-focus text-neutral-content rounded-full w-24">
+                        <div className="bg-neutral-focus text-neutral-content rounded-full w-24 ring ring-primary ring-offset-base-100 ring-offset-2">
                             {user.photoURL ?
                                 <img src={user.photoURL} alt="" /> :
                                 // Will display fist name 1st character
