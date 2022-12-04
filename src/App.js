@@ -20,6 +20,7 @@ import AddDoctor from './pages/Dashboard/AddDoctor';
 import RequireAdmin from './pages/Shared/RequireAdmin';
 import { Toaster } from 'react-hot-toast';
 import AllAppointments from './pages/Dashboard/AllAppointments';
+import VerifyEmail from './pages/Shared/VerifyEmail';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/verify-email' element={<VerifyEmail />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

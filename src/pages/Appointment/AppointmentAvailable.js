@@ -10,7 +10,7 @@ const AppointmentAvailable = ({ date }) => {
     const [booking, setBooking] = useState({});
 
     const { data: services, isLoading } = useQuery('services', () => fetch(baseUrl + '/service').then(res => res.json()));
-    if (isLoading) { return <Loading /> }
+
     // console.log(booking)
 
     return (
@@ -19,11 +19,12 @@ const AppointmentAvailable = ({ date }) => {
 
             <div className='my-10 grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
-                    services.map(service => <AppointmentCard
-                        key={service._id}
-                        date={date}
-                        service={service}
-                        setBooking={setBooking} />)
+                    isLoading ? <Loading /> :
+                        services.map(service => <AppointmentCard
+                            key={service._id}
+                            date={date}
+                            service={service}
+                            setBooking={setBooking} />)
                 }
             </div>
 

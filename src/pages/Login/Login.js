@@ -1,18 +1,22 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import auth from '../../utilities/firebase.init';
 import Loading from '../Shared/Loading';
 
 const Login = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, getValues, handleSubmit } = useForm();
     const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
     const location = useLocation();
     const navigate = useNavigate();
     const [token] = useToken();
+
+
     const from = location.state?.from?.pathname || '/';
 
     const onSubmit = async (data) => {
@@ -43,7 +47,17 @@ const Login = () => {
                             aria-invalid={errors.password ? "true" : "false"}
                         />
                         {errors.password?.type === 'required' && <p role="alert" className='text-error'>Password is required</p>}
-                        <label><Link>Forgot Password?</Link></label>
+
+                        <label className='text-secondary'><button onClick={async () => {
+                            const email = getValues('email');
+                            if (email) {
+                                const success = await sendPasswordResetEmail(email, { url: 'http://localhost:3000/login' });
+                                success && toast("Check email to reset your password.");
+                            } else {
+                                alert("Enter email in email field.");
+                            }
+                        }}>Forgot Password?</button></label>
+
                         {loading || gLoading
                             ? <Loading />
                             : <input type="submit" value='Login' className='btn btn-neutral w-full mt-4 mb-2' />}

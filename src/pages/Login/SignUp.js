@@ -8,12 +8,11 @@ import Loading from '../Shared/Loading';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true, emailVerificationOptions: { url: 'http://localhost:3000/' } });
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
     const [token] = useToken();
-
 
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
@@ -49,7 +48,7 @@ const SignUp = () => {
                             aria-invalid={errors.password ? "true" : "false"}
                         />
                         {errors.password && <p role="alert" className='text-error'>{errors.password?.message}</p>}
-                        <label><Link>Forgot Password?</Link></label>
+
                         {loading || gLoading
                             ? <Loading />
                             : <input type="submit" value='SignUp' className='btn btn-neutral w-full mt-4 mb-2' />}
