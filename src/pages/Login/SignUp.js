@@ -50,7 +50,7 @@ const SignUp = () => {
                         {errors.password && <p role="alert" className='text-error'>{errors.password?.message}</p>}
 
                         {loading || gLoading
-                            ? <Loading />
+                            ? <button className="btn loading w-full mt-4 mb-2 uppercase">SignUp</button>
                             : <input type="submit" value='SignUp' className='btn btn-neutral w-full mt-4 mb-2' />}
 
                         <label htmlFor="">Already registered? <Link to='/login' className='text-primary'>Login now</Link> </label>

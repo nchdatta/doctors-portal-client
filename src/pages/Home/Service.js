@@ -8,7 +8,7 @@ const Service = ({ service }) => {
             <figure className="mt-10">
                 <img src={img} alt="Shoes" className="rounded-xl" />
             </figure>
-            <div className="card-body items-center text-center text-neutral">
+            <div className="card-body px-2 items-center text-center text-neutral">
                 <h2 className="card-title">{title}</h2>
                 <p>{subTitle}</p>
             </div>

@@ -44,19 +44,19 @@ const services = [
         id: 100,
         img: fluoride,
         title: 'Fluoride Treatment',
-        subTitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, adipisci?'
+        subTitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, adipisci.'
     },
     {
         id: 101,
         img: cavity,
         title: 'Cavity Filling',
-        subTitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, adipisci?'
+        subTitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, adipisci.'
     },
     {
         id: 102,
         img: teeth,
         title: 'Teeth Whitenig',
-        subTitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, adipisci?'
+        subTitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, adipisci.'
     },
 ];
 
