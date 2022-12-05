@@ -56,7 +56,7 @@ const Doctors = () => {
                                     <td>{doctor.email}</td>
                                     <td>
                                         <div className="avatar">
-                                            <div className="w-16 rounded-full">
+                                            <div className="w-8 rounded-full">
                                                 <img src={doctor.image} alt={doctor.name} />
                                             </div>
                                         </div>

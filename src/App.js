@@ -24,6 +24,7 @@ import ForgotPassword from './pages/Login/ForgotPassword';
 import RequireDoctor from './pages/Shared/RequireDoctor';
 import Appointments from './pages/Dashboard/Appointments';
 import Profile from './pages/Dashboard/Profile';
+import MyDashboard from './pages/Dashboard/MyDashboard';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} >
           <Route index element={<Profile />} />
+          <Route path='my-dashboard' element={<RequireAdmin><MyDashboard /></RequireAdmin>} />
           <Route path='my-appointments' element={<MyAppointments />} />
           <Route path='appointment-history' element={<AppointmentHistory />} />
           <Route path='all-appointments' element={<RequireAdmin><AllAppointments /></RequireAdmin>} />

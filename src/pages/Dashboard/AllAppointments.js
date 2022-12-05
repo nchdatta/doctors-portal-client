@@ -1,19 +1,14 @@
 import { format } from 'date-fns';
 import React from 'react';
 import toast from 'react-hot-toast';
-import { useQuery } from 'react-query';
+import useBookings from '../../hooks/useBookings';
 import baseUrl from '../../utilities/baseUrl';
 import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 
 const AllAppointments = () => {
     // Getting bookings data 
-    const { data: bookings, isLoading, refetch } = useQuery('bookings', () => fetch(baseUrl + `/booking/all`, {
-        method: 'GET',
-        headers: {
-            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        }
-    }).then(res => res.json()));
+    const [bookings, isLoading, refetch] = useBookings();
     if (isLoading) { return <Loading /> }
 
 
@@ -64,7 +59,10 @@ const AllAppointments = () => {
                                     <td>{booking.doctor}</td>
                                     <td>{format(new Date(booking.date), 'PP')}</td>
                                     <td>{booking.slot}</td>
-                                    <td className={booking.status === 'Confirm' ? 'text-green-500 font-semibold' : 'text-orange-600'}>{booking.staus}</td>
+                                    <td className={booking.status === 'Confirm' ? 'text-green-500' : 'text-orange-600'}>
+                                        {booking.status}/<span className={booking.payment === 'Paid' ? 'text-green-500' : 'text-orange-600'}>
+                                            {booking.payment}</span></td>
+
                                     <td>{<button className='btn btn-sm btn-primary'
                                         onClick={() => handleCancel(booking._id)}
                                         title='Click to cancel the appointment.'>Cancel</button>}</td>

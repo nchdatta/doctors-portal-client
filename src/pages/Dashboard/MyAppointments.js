@@ -39,6 +39,21 @@ const MyAppointments = () => {
                 });
         }
     }
+    const handlePay = id => {
+        fetch(baseUrl + `/booking/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    refetch();
+                    toast.success(`Payment done for ${data.bookingPayment.treatment}`)
+                }
+            });
+    }
 
     return (
         <div>
@@ -66,10 +81,18 @@ const MyAppointments = () => {
                                     <td>{booking.doctor}</td>
                                     <td>{format(new Date(booking.date), 'PP')}</td>
                                     <td>{booking.slot}</td>
-                                    <td className={booking.status === 'Confirm' ? 'text-green-500 font-semibold' : 'text-orange-600'}>{booking.status}</td>
-                                    <td>{<button className='btn btn-sm btn-primary'
-                                        onClick={() => handleCancel(booking._id)}
-                                        title='Click to cancel the appointment.'>Cancel</button>}</td>
+                                    <td className={booking.status === 'Confirm' ? 'text-green-500' : 'text-orange-600'}>
+                                        {booking.status}/<span className={booking.payment === 'Paid' ? 'text-green-500' : 'text-orange-600'}>
+                                            {booking.payment}</span></td>
+
+                                    <td>{<button className='btn btn-sm btn-warning mr-2'
+                                        onClick={() => handlePay(booking._id)}
+                                        disabled={booking.payment === 'Paid'}
+                                        title='Click to Pay.'>Pay</button>}
+
+                                        {<button className='btn btn-sm btn-primary'
+                                            onClick={() => handleCancel(booking._id)}
+                                            title='Click to cancel the appointment.'>Cancel</button>}</td>
                                 </tr>)
                         }
                     </tbody>

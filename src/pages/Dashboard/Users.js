@@ -1,18 +1,12 @@
 import React from 'react';
 import PageTitle from '../Shared/PageTitle';
 import baseUrl from '../../utilities/baseUrl';
-import { useQuery } from 'react-query';
-import Loading from '../Shared/Loading';
 import toast from 'react-hot-toast';
+import useUsers from '../../hooks/useUsers';
+import Loading from '../Shared/Loading';
 
 const Users = () => {
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch(baseUrl + '/user', {
-        headers: {
-            'content-type': 'application/json',
-            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        }
-    }).then(res => res.json()));
-
+    const [users, isLoading, refetch] = useUsers();
     if (isLoading) { return <Loading /> }
 
     const RemoveUser = id => {

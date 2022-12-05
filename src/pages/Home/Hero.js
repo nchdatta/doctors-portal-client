@@ -8,9 +8,9 @@ const Hero = () => {
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col lg:flex-row ">
                     <div>
-                        <h1 className="text-5xl font-bold text-neutral">Find Best Doctors & Book Appointment</h1>
-                        <p className="py-8 text-neutral">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the</p>
+                        <h1 className="text-5xl font-bold text-neutral">Find Best Doctors</h1>
+                        <h1 className="text-5xl font-bold text-neutral">Book Appointment</h1>
+                        <p className="py-8 text-neutral">We offer an online based doctors appointment service with the facility of an electronic personal health record system, the first of its kind in our country.</p>
                         <PrimaryButton to='/appointment'>Get Started</PrimaryButton>
                     </div>
                     <img src={stethos} className="lg:w-1/2 rounded-lg shadow-lg" alt='Chair' />

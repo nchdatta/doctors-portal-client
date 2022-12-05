@@ -83,7 +83,9 @@ const Appointments = () => {
                                     <td>{'0' + appointment.patientPhone}</td>
                                     <td>{format(new Date(appointment.date), 'PP')}</td>
                                     <td>{appointment.slot}</td>
-                                    <td className={appointment.status === 'Confirm' ? 'text-green-500 font-semibold' : 'text-orange-600'}>{appointment.status}</td>
+                                    <td className={appointment.status === 'Confirm' ? 'text-green-500 font-semibold' : 'text-orange-600'}>
+                                        {appointment.status}/<span className={appointment.payment === 'Paid' ? 'text-green-500 font-semibold' : 'text-orange-600'}>
+                                            {appointment.payment}</span></td>
                                     <td>{
                                         <>
                                             {appointment.status !== 'Confirm' && <button className='btn btn-sm btn-primary mr-2'

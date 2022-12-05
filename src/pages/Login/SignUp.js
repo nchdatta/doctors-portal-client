@@ -31,7 +31,7 @@ const SignUp = () => {
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label htmlFor="name">Name</label>
-                        <input type='name' className='input input-bordered w-full'
+                        <input type='text' className='input input-bordered w-full'
                             {...register("name", { required: "Name is required" })}
                             aria-invalid={errors.name ? "true" : "false"}
                         />
