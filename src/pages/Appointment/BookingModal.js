@@ -31,12 +31,14 @@ const BookingModal = (props) => {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(booking)
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(data => {
                 if (data.success) {
                     setBooking(null);
                     toast.success(`Appointment booked for ${data.booking.treatment}`);
+                } else {
+                    setBooking(null);
+                    toast.error(data.message);
                 }
             });
 

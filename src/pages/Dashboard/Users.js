@@ -18,8 +18,7 @@ const Users = () => {
                     'content-type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
-            })
-                .then(res => res.json())
+            }).then(res => res.json())
                 .then(data => {
                     // console.log(data);
                     if (data.success) {
@@ -27,6 +26,8 @@ const Users = () => {
                         toast.success('Successfuly removed.');
                     }
                 });
+
+
         }
 
     }
@@ -91,11 +92,11 @@ const Users = () => {
                                             <button className='btn btn-sm btn-primary mr-2'
                                                 onClick={() => RemoveUser(user._id)}
                                                 title='Click to Remove the user.'>Remove</button>
-                                            {user.role !== 'admin' &&
+                                            {user.role !== 'Admin' &&
                                                 <button className='btn btn-sm btn-secondary mr-2'
                                                     onClick={() => MakeAdmin(user.email)}
                                                     title='Make this user an Admin.'>Admin</button>}
-                                            {user.role !== 'doctor' &&
+                                            {user.role !== 'Doctor' &&
                                                 <button className='btn btn-sm btn-warning'
                                                     onClick={() => MakeDoctor(user.email)}
                                                     title='Make this user a Doctor.'>Doctor</button>}

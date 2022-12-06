@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
 import useToken from '../../hooks/useToken';
-import Loading from '../Shared/Loading';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -12,7 +11,7 @@ const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
-    const [token] = useToken();
+    const [token] = useToken(user || gUser);
 
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
@@ -50,7 +49,7 @@ const SignUp = () => {
                         {errors.password && <p role="alert" className='text-error'>{errors.password?.message}</p>}
 
                         {loading || gLoading
-                            ? <button className="btn loading w-full mt-4 mb-2 uppercase">SignUp</button>
+                            ? <button className="btn loading w-full mt-4 mb-2 uppercase" disabled>SignUp</button>
                             : <input type="submit" value='SignUp' className='btn btn-neutral w-full mt-4 mb-2' />}
 
                         <label htmlFor="">Already registered? <Link to='/login' className='text-primary'>Login now</Link> </label>

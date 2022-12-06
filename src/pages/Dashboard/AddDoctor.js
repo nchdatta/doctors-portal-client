@@ -21,8 +21,7 @@ const AddDoctor = () => {
         fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_API}`, {
             method: 'POST',
             body: formData
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(data => {
                 if (data.success) {
                     const image = data.data.url;
@@ -35,14 +34,13 @@ const AddDoctor = () => {
                             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify({ name, email, speciality, image })
+                    }).then(res => {
+                        if (res.status === 403) {
+                            toast.error('Doctor already registered.');
+                        } else if (res.status === 200) {
+                            return res.json();
+                        }
                     })
-                        .then(res => {
-                            if (res.status === 403) {
-                                toast.error('Doctor already registered.');
-                            } else if (res.status === 200) {
-                                return res.json();
-                            }
-                        })
                         .then(data => {
                             setbbLoading(false);
                             if (data) {
@@ -63,7 +61,7 @@ const AddDoctor = () => {
             <h2 className='text-xl mb-3 text-primary'>Add a Doctor</h2>
             <form onSubmit={handleSubmit(onSubmit)} className='lg:w-1/2'>
                 <label htmlFor="name">Name</label>
-                <input type='name' className='input input-bordered w-full mb-4 capitalize'
+                <input type='text' className='input input-bordered w-full mb-4 capitalize'
                     {...register("name", { required: "Name is required" })}
                     aria-invalid={errors.name ? "true" : "false"}
                 />

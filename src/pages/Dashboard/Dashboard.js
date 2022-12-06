@@ -26,16 +26,16 @@ const Dashboard = () => {
                         {/* <!-- Sidebar content here --> */}
 
                         <li><Link to='/dashboard'>Profile</Link></li>
-                        {role === 'admin' &&
+                        {role === 'Admin' &&
                             <li><NavLink to='/dashboard/my-dashboard'>Dashboard</NavLink></li>}
 
-                        {role === 'user' || role === 'admin' ?
+                        {role === 'User' || role === 'Admin' ?
                             <>
                                 <li><NavLink to='/dashboard/my-appointments'>My Appointments</NavLink></li>
                                 <li><NavLink to='/dashboard/appointment-history'>Appointment History</NavLink></li>
                             </> : ''
                         }
-                        {role === 'admin' &&
+                        {role === 'Admin' &&
                             <>
                                 <li><NavLink to='/dashboard/all-appointments'>All Appointments</NavLink></li>
                                 <li><NavLink to='/dashboard/users'>Users</NavLink></li>
@@ -43,7 +43,7 @@ const Dashboard = () => {
                                 <li><NavLink to='/dashboard/add-doctor'>Add Doctor</NavLink></li>
                             </>
                         }
-                        {role === 'doctor' &&
+                        {role === 'Doctor' &&
                             <>
                                 <li><NavLink to='/dashboard/appointments'>Appointments</NavLink></li>
                             </>

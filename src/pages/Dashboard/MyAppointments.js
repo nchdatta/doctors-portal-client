@@ -12,13 +12,16 @@ const MyAppointments = () => {
     const [user] = useAuthState(auth);
 
     // Getting bookings data 
-    const { data: bookings, isLoading, refetch } = useQuery('bookings', () => fetch(baseUrl + `/booking?email=${user.email}`, {
+    const { data, isLoading, refetch } = useQuery('bookings', () => fetch(baseUrl + `/booking?email=${user?.email}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(res => res.json()));
     if (isLoading) { return <Loading /> }
+
+    // Ascending sort of booking
+    const bookings = data?.sort((a, b) => new Date(a.date) - new Date(b.date));
 
 
     const handleCancel = id => {
@@ -29,12 +32,21 @@ const MyAppointments = () => {
                 headers: {
                     'content-type': 'application/json'
                 }
-            })
-                .then(res => res.json())
+            }).then(res => res.json())
                 .then(data => {
                     if (data.success) {
                         refetch();
-                        toast.success(`Cancelled booking for ${data.deletedBooking.treatment}`)
+                        toast.success(`Cancelled booking for ${data.deletedBooking.treatment}`);
+
+                        // Post to BookingHistory 
+                        const { patientEmail, treatment, doctor, date, slot, payment } = data.deletedBooking;
+                        fetch(baseUrl + '/booking/history', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify({ patientEmail, treatment, doctor, date, slot, payment })
+                        }).then(res => res.json())
                     }
                 });
         }

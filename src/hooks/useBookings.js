@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import baseUrl from "../utilities/baseUrl";
 
 const useBookings = () => {
-    const { data: bookings, isLoading, refetch } = useQuery('bookings', () => fetch(baseUrl + `/booking/all`, {
+    const { data, isLoading, refetch } = useQuery('all-bookings', () => fetch(baseUrl + `/booking/all`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -10,7 +10,7 @@ const useBookings = () => {
     }).then(res => res.json()));
 
 
-    return [bookings, isLoading, refetch];
+    return [data, isLoading, refetch];
 };
 
 export default useBookings;

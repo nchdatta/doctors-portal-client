@@ -4,6 +4,25 @@
 
 This is a doctors portal application where you can able to find best and experienced doctors, book appointments and access to other important features. In this website, dashboard panel available for for both users and admin where features limited to users role.
 
+## Features
+1. Responsive design
+2. Different roles as User, Admin, Doctor
+3. Different features & access according to rule. 
+4. Dashboard Features/Pages as, 
+    - **User**
+        - Profile
+	    - My Appointments
+	    - Appointment History
+	- **Admin**
+		- Dashboard
+		- All Appointments
+		- Users
+		- Doctors
+		- Add Doctor
+    - **Doctor**
+	    - Profile
+	    - Appointments
+
 ## Technolgies Used
 This appliaction is a full-stack website. Different technologies used to implement the website.
 
@@ -12,7 +31,7 @@ This appliaction is a full-stack website. Different technologies used to impleme
 2. React Router
 3. React Query
 4. Tailwindcss
-5. DaisyUi
+5. DaisyUI
 6. Firebase Authentication
 7. React Firebase Hooks
 8. React Helmet
@@ -39,7 +58,11 @@ Live Demo: [https://doctorsportalbd.netlify.app](https://doctorsportalbd.netlify
 Server: [https://doctors-portal-21vz.onrender.com](https://doctors-portal-21vz.onrender.com)
 
 ## Demo Admin 
-Email: admin@admin.com\
-Password: demo1234
+Email: doctorsportalad@gmail.com\
+Password: admin1234
 
-### Stay Happy!
+## Demo Doctor 
+Email: nayanchdatta10@gmail.com\
+Password: doctor1234
+
+### Stay Happy, Stay Coding!

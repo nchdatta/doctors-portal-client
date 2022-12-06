@@ -1,10 +1,12 @@
 import React from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from '../../utilities/firebase.init';
+import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 
 const Profile = () => {
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
+    if (loading) { return <Loading /> }
 
     return (
         <div>
@@ -16,7 +18,7 @@ const Profile = () => {
                     <div className="avatar placeholder">
                         <div className="bg-neutral-focus text-neutral-content rounded-full w-24 ring ring-primary ring-offset-base-100 ring-offset-2">
                             {user.photoURL ?
-                                <img src={user.photoURL} alt="" /> :
+                                <img src={user.photoURL} alt={user.displayName} /> :
                                 // Will display fist name 1st character
                                 <span className="text-3xl"> {user.displayName.split(" ")[0][0]} </span>}
                         </div>

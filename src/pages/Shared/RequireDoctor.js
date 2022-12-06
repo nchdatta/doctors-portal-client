@@ -12,7 +12,7 @@ const RequireDoctor = ({ children }) => {
         return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
     }
 
-    if (role !== 'doctor') {
+    if (role !== 'Doctor') {
         return <Navigate to='/' replace />;
     }
     return children;

@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import baseUrl from "../utilities/baseUrl";
-import auth from "../utilities/firebase.init";
 
-const useToken = () => {
-    const [user] = useAuthState(auth);
+const useToken = (currentUser) => {
     const [token, setToken] = useState('');
 
     useEffect(() => {
-        if (user) {
+        if (currentUser) {
+            const user = currentUser.user;
             // JWT Token Verification 
             fetch(baseUrl + '/user/verify-token', {
                 method: 'POST',
@@ -16,8 +14,7 @@ const useToken = () => {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({ email: user.email })
-            })
-                .then(res => res.json())
+            }).then(res => res.json())
                 .then(data => {
                     const accessToken = data.accessToken;
                     localStorage.setItem('accessToken', accessToken)
@@ -32,14 +29,13 @@ const useToken = () => {
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({ email: user.email })
-            })
-                .then(res => res.json())
+                body: JSON.stringify(user)
+            }).then(res => res.json())
                 .then();
 
         }
 
-    }, [user]);
+    }, [currentUser]);
 
 
     return [token];

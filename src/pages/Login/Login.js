@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import auth from '../../utilities/firebase.init';
-import Loading from '../Shared/Loading';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -12,7 +11,7 @@ const Login = () => {
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const location = useLocation();
     const navigate = useNavigate();
-    const [token] = useToken();
+    const [token] = useToken(user || gUser);
 
     const from = location.state?.from?.pathname || '/';
 
@@ -48,7 +47,7 @@ const Login = () => {
                         <Link to='/forgot-password' className='text-secondary'>Forgot Password?</Link>
 
                         {loading || gLoading
-                            ? <button className="btn loading w-full mt-4 mb-2 uppercase">Login</button>
+                            ? <button className="btn loading w-full mt-4 mb-2 uppercase" disabled>Login</button>
                             : <input type="submit" value='Login' className='btn btn-neutral w-full mt-4 mb-2' />}
 
                         <label htmlFor="">New to Doctors Portal? <Link to='/signup' className='text-primary'>Create new account</Link> </label>

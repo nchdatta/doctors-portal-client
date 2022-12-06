@@ -6,8 +6,8 @@ const useRole = (user) => {
     const [roleLoading, setRoleLoading] = useState(true);
 
     useEffect(() => {
-        const email = user?.email;
-        if (email) {
+        if (user) {
+            const email = user.email;
             fetch(baseUrl + `/user/role/${email}`, {
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`

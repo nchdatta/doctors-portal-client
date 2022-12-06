@@ -7,7 +7,7 @@ const AppointmentCard = ({ date, service, setBooking }) => {
     const { treatment, slots } = service;
     const currentDate = new Date();
     return (
-        <div className="card shadow-lg">
+        <div className="card shadow-lg border">
             <div className="card-body text-neutral text-center">
                 <h2 className="card-title mx-auto">{treatment}</h2>
                 <p>{slots.length ? slots[0] : <span className='text-error'>No slots available</span>}</p>
