@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import auth from '../../utilities/firebase.init';
 
 const ForgotPassword = () => {
-    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+    const [sendPasswordResetEmail, loading] = useSendPasswordResetEmail(auth);
     const nv = useNavigate();
 
     const handleForgotPassword = async e => {
@@ -14,11 +14,13 @@ const ForgotPassword = () => {
         const success = await sendPasswordResetEmail(email, { url: 'http://localhost:3000/login' });
         if (success) {
             toast.success("Check email to reset your password.");
-            nv('/');
+            nv('/', { replace: true });
         } else {
             toast.error("Enter email address correctly.");
         }
     }
+
+
     return (
         <div className='lg:w-1/3 px-4 lg:px-0 mx-auto min-h-screen flex items-start justify-center pt-20'>
             <div className="card shadow-lg w-full border">
@@ -28,7 +30,9 @@ const ForgotPassword = () => {
                     <form onSubmit={handleForgotPassword}>
                         <input type='email' name='email' className='input input-bordered w-full my-6'
                             placeholder='Enter email address' required />
-                        <input type="submit" value='Forgot Password' className='btn btn-neutral w-full' />
+                        {loading
+                            ? <button className='btn loading w-full' disabled>Sending Email</button>
+                            : <input type="submit" value='Forgot Password' className='btn btn-neutral w-full' />}
                     </form>
                 </div>
             </div>

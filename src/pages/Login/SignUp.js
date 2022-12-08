@@ -4,10 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../utilities/firebase.init';
 import useToken from '../../hooks/useToken';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true, emailVerificationOptions: { url: 'http://localhost:3000/' } });
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true, emailVerificationOptions: { url: 'http://localhost:3000/' } });
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
@@ -20,6 +21,9 @@ const SignUp = () => {
 
     if (token) {
         navigate('/', { replace: true });
+    }
+    if (error) {
+        toast.error('Email already exists.');
     }
 
     return (

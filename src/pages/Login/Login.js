@@ -1,13 +1,14 @@
 import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import auth from '../../utilities/firebase.init';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const location = useLocation();
     const navigate = useNavigate();
@@ -22,6 +23,9 @@ const Login = () => {
 
     if (token) {
         navigate(from, { replace: true });
+    }
+    if (error) {
+        toast.error('Incorrect email/password.');
     }
 
     return (

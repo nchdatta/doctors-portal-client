@@ -8,8 +8,8 @@ const Hero = () => {
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col lg:flex-row ">
                     <div>
-                        <h1 className="text-5xl font-bold text-neutral">Find Best Doctors</h1>
-                        <h1 className="text-5xl font-bold text-neutral">Book Appointment</h1>
+                        <h1 className="text-4xl lg:text-5xl font-bold text-neutral">Find Best Doctors</h1>
+                        <h1 className="text-4xl lg:text-5xl font-bold text-neutral">Book Appointment</h1>
                         <p className="py-8 text-neutral">We offer an online based doctors appointment service with the facility of an electronic personal health record system, the first of its kind in our country.</p>
                         <PrimaryButton to='/appointment'>Get Started</PrimaryButton>
                     </div>

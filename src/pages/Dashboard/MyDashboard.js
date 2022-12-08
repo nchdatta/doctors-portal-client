@@ -2,12 +2,14 @@ import React from 'react';
 import useBookings from '../../hooks/useBookings';
 import useDoctors from '../../hooks/useDoctors';
 import useUsers from '../../hooks/useUsers';
+import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 
 const MyDashboard = () => {
-    const [doctors] = useDoctors();
+    const [doctors, isLoading] = useDoctors();
     const [users] = useUsers();
     const [bookings] = useBookings();
+    if (isLoading) { return <Loading /> }
     const paidBookings = bookings?.filter(b => b.payment === 'Paid');
 
     return (
