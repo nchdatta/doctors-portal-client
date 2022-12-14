@@ -1,12 +1,10 @@
 import React from 'react';
 import useDoctors from '../../hooks/useDoctors';
-import Loading from '../Shared/Loading';
 import SectionHeading from '../Shared/SectionHeading';
 import Doctor from './Doctor';
 
 const DoctorsHome = () => {
-    const [doctors, isLoading] = useDoctors();
-    if (isLoading) { return <Loading /> }
+    const [doctors] = useDoctors();
 
     return (
         <section className='my-14 px-4 lg:px-8'>

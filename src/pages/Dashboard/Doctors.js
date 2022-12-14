@@ -3,11 +3,9 @@ import baseUrl from '../../utilities/baseUrl';
 import PageTitle from '../Shared/PageTitle';
 import toast from 'react-hot-toast';
 import useDoctors from '../../hooks/useDoctors';
-import Loading from '../Shared/Loading';
 
 const Doctors = () => {
-    const [doctors, isLoading, refetch] = useDoctors();
-    if (isLoading) { return <Loading /> }
+    const [doctors, refetch] = useDoctors();
 
 
     const RemoveDoctor = (id, name) => {

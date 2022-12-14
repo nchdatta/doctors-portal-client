@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, Routes } from 'react-router-dom';
 import useRole from '../../hooks/useRole';
@@ -7,25 +7,26 @@ import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 import RequireAdmin from '../Shared/RequireAdmin';
 import RequireDoctor from '../Shared/RequireDoctor';
-import AddDoctor from './AddDoctor';
-import AllAppointments from './AllAppointments';
-import AppointmentHistory from './AppointmentHistory';
-import Appointments from './Appointments';
-import Doctors from './Doctors';
 import IconNav from './IconNav';
-import MyAppointments from './MyAppointments';
-import MyDashboard from './MyDashboard';
 import Profile from './Profile';
-import UpdatePassword from './UpdatePassword';
-import Users from './Users';
+const AddDoctor = React.lazy(() => import('./AddDoctor'));
+const AllAppointments = React.lazy(() => import('./AllAppointments'));
+const AppointmentHistory = React.lazy(() => import('./AppointmentHistory'));
+const Appointments = React.lazy(() => import('./Appointments'));
+const Doctors = React.lazy(() => import('./Doctors'));
+const MyAppointments = React.lazy(() => import('./MyAppointments'));
+const MyDashboard = React.lazy(() => import('./MyDashboard'));
+const UpdatePassword = React.lazy(() => import('./UpdatePassword'));
+const Users = React.lazy(() => import('./Users'));
+
+
 const profileIcon = <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>;
 const dashboardIcon = <svg aria-hidden="true" className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>;
 
 
 const Dashboard = () => {
-    const [user, roleLoading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [role] = useRole(user);
-    if (roleLoading) { return <Loading /> }
 
 
     return (
@@ -59,14 +60,14 @@ const Dashboard = () => {
                 <Routes>
                     <Route index element={<Profile />} />
                     <Route path='profile/change-password' element={<UpdatePassword />} />
-                    <Route path='my-dashboard' element={<RequireAdmin><MyDashboard /></RequireAdmin>} />
-                    <Route path='my-appointments' element={<MyAppointments />} />
-                    <Route path='appointment-history' element={<AppointmentHistory />} />
-                    <Route path='all-appointments' element={<RequireAdmin><AllAppointments /></RequireAdmin>} />
-                    <Route path='appointments' element={<RequireDoctor><Appointments /></RequireDoctor>} />
-                    <Route path='users' element={<RequireAdmin><Users /></RequireAdmin>} />
-                    <Route path='doctors' element={<RequireAdmin><Doctors /></RequireAdmin>} />
-                    <Route path='add-doctor' element={<RequireAdmin><AddDoctor /></RequireAdmin>} />
+                    <Route path='my-dashboard' element={<RequireAdmin><Suspense fallback={<Loading />}><MyDashboard /></Suspense></RequireAdmin>} />
+                    <Route path='my-appointments' element={<Suspense fallback={<Loading />}><MyAppointments /></Suspense>} />
+                    <Route path='appointment-history' element={<Suspense fallback={<Loading />}><AppointmentHistory /></Suspense>} />
+                    <Route path='all-appointments' element={<RequireAdmin><Suspense fallback={<Loading />}><AllAppointments /></Suspense></RequireAdmin>} />
+                    <Route path='appointments' element={<RequireDoctor><Suspense fallback={<Loading />}><Appointments /></Suspense></RequireDoctor>} />
+                    <Route path='users' element={<RequireAdmin><Suspense fallback={<Loading />}><Users /></Suspense></RequireAdmin>} />
+                    <Route path='doctors' element={<RequireAdmin><Suspense fallback={<Loading />}><Doctors /></Suspense></RequireAdmin>} />
+                    <Route path='add-doctor' element={<RequireAdmin><Suspense fallback={<Loading />}><AddDoctor /></Suspense></RequireAdmin>} />
                 </Routes>
             </div>
         </div>

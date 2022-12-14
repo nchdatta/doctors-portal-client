@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import baseUrl from "../utilities/baseUrl";
 
 const useDoctors = () => {
-    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch(baseUrl + '/doctor', {
+    const { data: doctors, refetch } = useQuery('doctors', () => fetch(baseUrl + '/doctor', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -11,7 +11,7 @@ const useDoctors = () => {
     }).then(res => res.json()));
 
 
-    return [doctors, isLoading, refetch];
+    return [doctors, refetch];
 };
 
 export default useDoctors;

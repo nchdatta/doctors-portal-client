@@ -11,8 +11,8 @@ const Navbar = () => {
         <>
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/about'>About</NavLink></li>
-            <li><NavLink to='/appointment'>Appointment</NavLink></li>
             <li><NavLink to='/reviews'>Reviews</NavLink></li>
+            <li><NavLink to='/appointment'>Appointment</NavLink></li>
             {user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
             <li>{user ? <Link onClick={async () => {
                 await signOut();

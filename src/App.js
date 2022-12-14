@@ -1,19 +1,20 @@
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import About from './pages/About/About';
-import Appointment from './pages/Appointment/Appointment';
-import Dashboard from './pages/Dashboard/Dashboard';
 import NotFound from './pages/ErrorPage/NotFound';
-import ContactUs from './pages/Home/ContactUs';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import SignUp from './pages/Login/SignUp';
 import Reviews from './pages/Reviews/Reviews';
 import Footer from './pages/Shared/Footer';
 import Navbar from './pages/Shared/Navbar';
 import RequireAuth from './pages/Shared/RequireAuth';
 import { Toaster } from 'react-hot-toast';
-import ForgotPassword from './pages/Login/ForgotPassword';
+import Loading from './pages/Shared/Loading';
+const Dashboard = React.lazy(() => import('./pages/Dashboard/Dashboard'));
+const Appointment = React.lazy(() => import('./pages/Appointment/Appointment'));
+const ForgotPassword = React.lazy(() => import('./pages/Login/ForgotPassword'));
+const SignUp = React.lazy(() => import('./pages/Login/SignUp'));
 
 function App() {
   return (
@@ -24,13 +25,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/appointment' element={<RequireAuth><Appointment /></RequireAuth>} />
+        <Route path='/appointment' element={<RequireAuth><Suspense fallback={<Loading />}><Appointment /></Suspense></RequireAuth>} />
         <Route path='/reviews' element={<Reviews />} />
-        <Route path='/dashboard/*' element={<RequireAuth><Dashboard /></RequireAuth>} />
-        <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/dashboard/*' element={<RequireAuth><Suspense fallback={<Loading />}><Dashboard /></Suspense></RequireAuth>} />
+        <Route path='/signup' element={<Suspense fallback={<Loading />}><SignUp /></Suspense>} />
+        <Route path='/forgot-password' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

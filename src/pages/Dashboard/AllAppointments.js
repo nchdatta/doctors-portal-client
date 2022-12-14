@@ -3,13 +3,11 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import useBookings from '../../hooks/useBookings';
 import baseUrl from '../../utilities/baseUrl';
-import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 
 const AllAppointments = () => {
     // Getting bookings data 
-    const [data, isLoading, refetch] = useBookings();
-    if (isLoading) { return <Loading /> }
+    const [data, refetch] = useBookings();
 
     // Ascending sort of booking
     const bookings = data?.sort((a, b) => new Date(a.date) - new Date(b.date));

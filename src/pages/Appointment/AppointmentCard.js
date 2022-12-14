@@ -30,7 +30,7 @@ const AppointmentCard = ({ date, service, setBooking }) => {
                             }
                         }}
                         disabled={slots.length === 0}
-                        className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white">
+                        className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">
                         Book Appointment</label>
                 </div>
             </div>

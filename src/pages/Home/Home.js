@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 import AppointmentSection from './AppointmentSection';
 import Banner from './Banner';
 import ContactUs from './ContactUs';
-import DoctorsHome from './DoctorsHome';
 import Hero from './Hero';
 import Info from './Info';
 import Services from './Services';
 import Testimonials from './Testimonials';
+const DoctorsHome = React.lazy(() => import('./DoctorsHome'));
 
 const Home = () => {
     return (
@@ -18,7 +19,7 @@ const Home = () => {
             <Services />
             <Banner />
             <AppointmentSection />
-            <DoctorsHome />
+            <Suspense fallback={<Loading />}><DoctorsHome /></Suspense>
             <Testimonials />
             <ContactUs />
         </div>

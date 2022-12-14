@@ -3,11 +3,9 @@ import PageTitle from '../Shared/PageTitle';
 import baseUrl from '../../utilities/baseUrl';
 import toast from 'react-hot-toast';
 import useUsers from '../../hooks/useUsers';
-import Loading from '../Shared/Loading';
 
 const Users = () => {
-    const [users, isLoading, refetch] = useUsers();
-    if (isLoading) { return <Loading /> }
+    const [users, refetch] = useUsers();
 
     const RemoveUser = id => {
         const confirm = window.confirm('Are you sure want to remove the user?');

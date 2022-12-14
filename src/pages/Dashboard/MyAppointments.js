@@ -4,7 +4,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import baseUrl from '../../utilities/baseUrl';
 import auth from '../../utilities/firebase.init';
-import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 import toast from 'react-hot-toast';
 
@@ -12,13 +11,12 @@ const MyAppointments = () => {
     const [user] = useAuthState(auth);
 
     // Getting bookings data 
-    const { data, isLoading, refetch } = useQuery('bookings', () => fetch(baseUrl + `/booking?email=${user?.email}`, {
+    const { data, refetch } = useQuery('bookings', () => fetch(baseUrl + `/booking?email=${user?.email}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(res => res.json()));
-    if (isLoading) { return <Loading /> }
 
     // Ascending sort of booking
     const bookings = data?.sort((a, b) => new Date(a.date) - new Date(b.date));
