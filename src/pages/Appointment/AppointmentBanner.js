@@ -10,10 +10,10 @@ const AppointmentBanner = ({ date, setDate }) => {
     const futureDate = new Date(new Date().setDate(new Date().getDate() + 30));
 
     return (
-        <section className='hero-section py-20'>
+        <section className='hero-section-app py-20'>
             <div className="hero">
                 <div className="hero-content">
-                    <div className='rounded-lg shadow-lg'>
+                    <div className='rounded-lg shadow-xl border-2 border-primary bg-white'>
                         <DayPicker
                             mode='single'
                             onDayClick={(e) => {
