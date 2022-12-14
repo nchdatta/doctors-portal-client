@@ -6,8 +6,10 @@ This is a doctors portal application where you can able to find best and experie
 
 ## Features
 1. Responsive design
+2. Optimized Performance
+3. Code splitting with Lazy loading & Suspence
 2. Different roles as User, Admin, Doctor
-3. Different features & access according to rule. 
+3. Different features & access according to rule
 4. Dashboard Features/Pages as, 
     - **User**
         - Profile
@@ -24,7 +26,7 @@ This is a doctors portal application where you can able to find best and experie
 	    - Appointments
 
 ## Technolgies Used
-This appliaction is a full-stack website. Different technologies used to implement the website.
+This appliaction is a MERN, full-stack website. Different technologies used to implement the website.
 
 ### Front-end
 1. Reactjs
@@ -65,4 +67,4 @@ Password: admin1234
 Email: nayanchdatta10@gmail.com\
 Password: doctor1234
 
-### Stay Happy, Stay Coding!
+## #Stay Happy, Stay Coding!
