@@ -9,8 +9,8 @@ const DoctorsHome = () => {
     if (isLoading) { return <Loading /> }
 
     return (
-        <section className='my-12 px-4 lg:px-8'>
-            <div className="text-center mb-16">
+        <section className='my-14 px-4 lg:px-8'>
+            <div className="text-center mb-10">
                 <SectionHeading title={'Doctors'} subTitle={'Best, Experienced Doctors'} />
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>

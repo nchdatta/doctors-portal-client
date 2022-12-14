@@ -6,7 +6,7 @@ import { services } from '../../utilities/fakedata';
 const Services = () => {
     return (
         <section className='my-20 px-4 lg:px-8'>
-            <div className="text-center mb-16">
+            <div className="text-center mb-10">
                 <SectionHeading title={'Our Services'} subTitle={'Services We Provide'} />
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>

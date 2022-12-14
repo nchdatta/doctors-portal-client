@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const PrimaryButton = ({ to, children }) => {
     return (
-        <Link className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white"
+        <Link className="btn btn-primary border-0 bg-gradient-to-r from-primary to-secondary text-white"
             to={to}>{children}</Link>
     );
 };

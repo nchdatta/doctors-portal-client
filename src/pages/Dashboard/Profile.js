@@ -42,6 +42,7 @@ const Profile = () => {
         }
     }
 
+
     return (
         <div>
             <PageTitle title='Profile' />

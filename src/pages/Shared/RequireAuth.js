@@ -12,7 +12,7 @@ const RequireAuth = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <div><svg className="animate-spin h-8 w-8 bg-primary mx-auto" viewBox="0 0 24 24"></svg></div>;
+        return <Loading />
     }
 
     if (!user) {
