@@ -31,7 +31,7 @@ const Navbar = () => {
                             {menus}
                         </ul>
                     </div>
-                    <Link to={'/'} className="text-primary font-bold normal-case text-xl flex items-center"><img src="logo.png" alt="Logo" className='w-8 h-8 mr-1' /> Doctors Portal</Link>
+                    <Link to={'/'} className="text-primary font-bold normal-case text-xl flex items-center"><img src="/logo.png" alt="Logo" className='w-8 h-8 mr-1' /> Doctors Portal</Link>
                 </div>
 
                 <div className="navbar-end hidden lg:flex">

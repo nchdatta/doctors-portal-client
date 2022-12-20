@@ -39,8 +39,8 @@ const Dashboard = () => {
         <div className='flex flex-col lg:flex-row min-h-screen mt-2'>
             <PageTitle title="Dashboard" />
             {/* sidebar area  */}
-            <aside className="w-full lg:w-1/5" aria-label="Sidebar">
-                <div className="overflow-y-auto lg:min-h-screen py-4 px-2 bg-gray-50 rounded dark:bg-gray-800 flex flex-row lg:flex-col flex-wrap gap-2">
+            <aside className="lg:w-1/5" aria-label="Sidebar">
+                <div className="overflow-x-auto lg:min-h-screen py-4 px-2 bg-gray-50 rounded dark:bg-gray-800 flex flex-row lg:flex-col flex-wrap gap-3 lg:gap-2">
                     <IconNav to='/dashboard' name='Profile' icon={profileIcon} />
                     {role === 'Admin' &&
                         <IconNav to='/dashboard/my-dashboard' name='Dashboard' icon={dashboardIcon} />}
@@ -62,7 +62,7 @@ const Dashboard = () => {
             </aside>
 
             {/* Main content area  */}
-            <div className='w-full lg:w-4/5 p-3 lg:p-5'>
+            <div className='lg:w-4/5 p-3 lg:p-5'>
                 <Routes>
                     <Route index element={<Profile />} />
                     <Route path='profile/change-password' element={<UpdatePassword />} />
