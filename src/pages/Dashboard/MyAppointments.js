@@ -6,6 +6,7 @@ import baseUrl from '../../utilities/baseUrl';
 import auth from '../../utilities/firebase.init';
 import PageTitle from '../Shared/PageTitle';
 import toast from 'react-hot-toast';
+import { NavLink } from 'react-router-dom';
 
 const MyAppointments = () => {
     const [user] = useAuthState(auth);
@@ -49,21 +50,6 @@ const MyAppointments = () => {
                 });
         }
     }
-    const handlePay = id => {
-        fetch(baseUrl + `/booking/${id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    refetch();
-                    toast.success(`Payment done for ${data.bookingPayment.treatment}`)
-                }
-            });
-    }
 
     return (
         <div>
@@ -95,10 +81,9 @@ const MyAppointments = () => {
                                         {booking.status}/<span className={booking.payment === 'Paid' ? 'text-green-500' : 'text-orange-600'}>
                                             {booking.payment}</span></td>
 
-                                    <td>{<button className='btn btn-sm btn-warning mr-2'
-                                        onClick={() => handlePay(booking._id)}
+                                    <td>{<NavLink to={`/checkout/${booking._id}`} className='btn btn-sm btn-warning mr-2'
                                         disabled={booking.payment === 'Paid'}
-                                        title='Click to Pay.'>Pay</button>}
+                                        title='Click to Pay.'>Pay</NavLink>}
 
                                         {<button className='btn btn-sm btn-primary'
                                             onClick={() => handleCancel(booking._id)}

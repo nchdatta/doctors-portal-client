@@ -11,6 +11,8 @@ import Navbar from './pages/Shared/Navbar';
 import RequireAuth from './pages/Shared/RequireAuth';
 import { Toaster } from 'react-hot-toast';
 import Loading from './pages/Shared/Loading';
+import Payment from './pages/Shared/Payment';
+const Checkout = React.lazy(() => import('./pages/Dashboard/Checkout'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard/Dashboard'));
 const Appointment = React.lazy(() => import('./pages/Appointment/Appointment'));
 const ForgotPassword = React.lazy(() => import('./pages/Login/ForgotPassword'));
@@ -27,6 +29,8 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/appointment' element={<RequireAuth><Suspense fallback={<Loading />}><Appointment /></Suspense></RequireAuth>} />
         <Route path='/reviews' element={<Reviews />} />
+        <Route path='/checkout/:id' element={<RequireAuth><Suspense fallback={<Loading />}><Checkout /></Suspense></RequireAuth>} />
+        <Route path='/payment' element={<Payment />} />
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard/*' element={<RequireAuth><Suspense fallback={<Loading />}><Dashboard /></Suspense></RequireAuth>} />
         <Route path='/signup' element={<Suspense fallback={<Loading />}><SignUp /></Suspense>} />

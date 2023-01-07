@@ -40,7 +40,7 @@ const Dashboard = () => {
             <PageTitle title="Dashboard" />
             {/* sidebar area  */}
             <aside className="lg:w-1/5" aria-label="Sidebar">
-                <div className="overflow-x-auto lg:min-h-screen py-4 px-2 bg-gray-50 rounded dark:bg-gray-800 flex flex-row lg:flex-col flex-wrap gap-3 lg:gap-2">
+                <div className="overflow-x-auto lg:min-h-screen py-4 px-2 bg-gray-50 rounded flex flex-row lg:flex-col flex-wrap gap-3 lg:gap-2">
                     <IconNav to='/dashboard' name='Profile' icon={profileIcon} />
                     {role === 'Admin' &&
                         <IconNav to='/dashboard/my-dashboard' name='Dashboard' icon={dashboardIcon} />}

@@ -52,10 +52,10 @@ const Profile = () => {
                 <div className="flex flex-col justify-center items-start">
                     <div className="avatar placeholder">
                         <div className="bg-neutral-focus text-neutral-content rounded-full w-24 ring ring-primary ring-offset-base-100 ring-offset-2">
-                            {user.photoURL ?
+                            {user?.photoURL ?
                                 <img src={user.photoURL} alt={user.displayName} /> :
                                 // Will display fist name 1st character
-                                <span className="text-3xl"> {user.displayName.split(" ")[0][0]} </span>}
+                                <span className="text-3xl"> {user?.displayName.split(" ")[0][0]} </span>}
                         </div>
                     </div>
                     <h2 className='text-2xl font-semibold mt-3'>{user.displayName}</h2>
