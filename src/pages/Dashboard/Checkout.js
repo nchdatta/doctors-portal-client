@@ -1,11 +1,11 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import baseUrl from '../../utilities/baseUrl';
-import Loading from '../Shared/Loading';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import CheckoutForm from './CheckoutForm';
+import PageTitle from '../Shared/PageTitle';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK_KEY);
 
@@ -39,6 +39,7 @@ const Checkout = () => {
 
     return (
         <div className='w-full lg:w-3/4 mx-auto min-h-screen px-4'>
+            <PageTitle title="Checkout" />
             {
                 clientSecret && <Elements options={options} stripe={stripePromise}>
                     <CheckoutForm booking={booking} />
