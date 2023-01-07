@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true, emailVerificationOptions: { url: 'http://localhost:3000/' } });
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true, emailVerificationOptions: { url: 'https://doctorsportalbd.netlify.app' } });
     const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const navigate = useNavigate();
