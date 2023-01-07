@@ -96,7 +96,7 @@ const CheckoutForm = ({ booking }) => {
 
     return (
         <div className='w-full mt-10 shadow-md border rounded-lg p-10 min-h-[450px]'>
-            <div class="flex flex-col lg:flex-row justify-between gap-10 lg:gap-4">
+            <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-4">
                 <div>
                     <h2 className='text-2xl font-bold border-b-2 mb-4'>Payment For</h2>
                     <p className='text-md mb-2 text-gray-500'><b>Treatment:</b> {treatment}</p>
